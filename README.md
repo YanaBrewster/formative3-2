@@ -1,20 +1,21 @@
 # formative3-2
+
 ## Yoobee group assignment with Natalia, James and Yana
 
-To run this project you need nodejs installed
+### To run this project you need node.js installed
 
-Step 1 – Clone this project to www or htdocs folder git clone https://github.com/YanaBrewster/formative3-2.git
+1 – Clone this project to www or htdocs folder with the following command 'git clone https://github.com/YanaBrewster/formative3-2.git --branch master-dev'
 
-Step 2 – Install packages npm i
+2 – To install required packages type and enter 'npm i' into the terminal
 
-Step 3 – Mongodb You should have a mongodb account. The URI connection string needs username, password and cluster name with attached id. If not, create an account and get the uri string from https://www.mongodb.com/
+3 – To use MongoDB, you should have a mongodb account. The URI connection string needs a username, password and cluster name with an attached id. If you do not have one, create an account and get the uri string from https://www.mongodb.com/
 
-Copy the config-copy.json file and rename it to config.json and add your username, password and clustername with its id.
+Copy the config-copy.json file and rename it to config.json and add your username, password and cluster name with its id.
 
-Step 4 - Run the project You should have installed nodemon globally. if not run npm install nodemon -g
+4 - To run the project you should have installed nodemon globally. if not run 'npm install nodemon -g'
 
-use the legacy version in vagrant set up nodemon -L index.js
+a. If using the legacy version in vagrant, type and enter 'nodemon -L index.js' in the terminal.
 
-use this in non-vagrant set up nodemon index.js
+b. Else (if non-vagrant), type and enter 'nodemon index.js' in the terminal.
 
-Step 5 - To see the home page localhost:3000 or use ip in the place of localhost
+5 - To see the home page, type and enter 'localhost:3000'in your browser or use your ip address instead of localhost.
