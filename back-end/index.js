@@ -41,7 +41,33 @@ app.use(bodyParser.urlencoded({extended:false}));
 
 app.use(cors());
 
-app.get('/', (req, res) => res.send('Hello World!'))
+
+
+// Test Code - James {
+
+// // Register Item
+// app.post('/registerItem', (req,res)=>{
+//
+//   Item.findOne({username:req.body.username},(err,itemResult)=>{
+//     if (itemResult){
+//       res.send('name taken already. Please try another one');
+//     } else{
+//       const item = new Item({
+//         _id : new mongoose.Types.ObjectId,
+//         username : req.body.username,
+//         description : req.body.description,
+//         image : req.body.image
+//       });
+//
+//       item.save().then(result =>{
+//         res.send(result);
+//       }).catch(err => res.send(err));
+//     }
+//   })
+// });
+
+// }
+
 
 
 // // GET an item/s
