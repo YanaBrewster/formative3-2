@@ -3,7 +3,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const bodyParse = require('body-parser');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcryptjs = require('bcryptjs');
 const config = require('./config.json'); // store creditials
@@ -15,7 +15,7 @@ const port = 3000;
 
 app.get('/', (req, res) => res.send('Hello World from Natalia, James and Yana!'))
 
-const mongodbURI = `mongodb+srv://${config.MONGO_USER}:${config.MONGO_PASSWORD}@${config.MONGO_CLUSTER_NAME}-ygo7y.mongodb.net/shop?retryWrites=true&w=majority`
+const mongodbURI = `mongodb+srv://${config.MONGO_USER}:${config.MONGO_PASSWORD}@${config.MONGO_CLUSTER_NAME}-fymte.mongodb.net/Formative3-2?retryWrites=true&w=majority`
 mongoose.connect(mongodbURI, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(()=> console.log('DB connected'))
 .catch(err =>{
@@ -54,16 +54,16 @@ app.get('/', (req, res) => res.send('Hello World!'))
 app.get('/allDBItems', (req,res) =>{
   Item.find().then(result =>{
     res.send(result);
-  })
+  }).catch(err => res.send(err));
 });
 
 // GET one item
 
 app.get('/item/id=:id', (req,res) =>{
   const idParam = req.params.id;
-  for (let i = 0; i < item.length; i++){
-    if (idParam.toString() === item[i].id.toString()) {
-      res.json(item[i]);
+  for (let i = 0; i < Item.length; i++){
+    if (idParam === Item[i]._id) {
+      res.json(Item[i]);
     }
   }
 });
