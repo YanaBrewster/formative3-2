@@ -1,5 +1,4 @@
 // Yanas code
-
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -7,7 +6,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcryptjs = require('bcryptjs');
 const config = require('./config.json'); // store creditials
-const dbItem = require('./models/item.js');
+const item = require('./models/item.js');
 const Item = require('./models/item.js');
 const Member = require('./models/member.js');
 
@@ -68,34 +67,24 @@ app.use(cors());
 
 // }
 
-
-
-// // GET an item/s
-// app.get('/allItems', (req,res)=>{
-//   res.json(item)
-// });
+// Yanas code
 
 // GET all db items
-
-app.get('/allDBItems', (req,res) =>{
+app.get('/allItems', (req,res) =>{
   Item.find().then(result =>{
     res.send(result);
   }).catch(err => res.send(err));
 });
 
 // GET one item
-
-app.get('/item/id=:id', (req,res) =>{
+app.get('/items/:id', (req,res) =>{
   const idParam = req.params.id;
-  for (let i = 0; i < Item.length; i++){
-    if (idParam === Item[i]._id) {
-      res.json(Item[i]);
-    }
-  }
+  Item.findOne({_id:idParam}).then(itemResult =>{
+      res.send(itemResult);
+  }).catch(err => res.send(err)); //refers to mogodb id
 });
 
 // DELETE an item
-
 app.delete('/deleteItem/:id',(req,res)=>{
   const idParam = req.params.id;
   Item.findOne({_id:idParam}, (err,item)=>{
