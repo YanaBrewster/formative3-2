@@ -7,7 +7,6 @@ const itemSchema = new mongoose.Schema({
   username : String,
   description : String,
   image : String
-
 });
 // For it to be used
 module.exports = mongoose.model('Item', itemSchema);

@@ -94,6 +94,26 @@ app.get('/item/id=:id', (req,res) =>{
   }
 });
 
+//add items
+app.post('/addItem', (req,res) =>{
+  //checking if product is found in the db already
+  Item.findOne({name:req.body.name},(err,itemResult)=>{
+    if (itemResult){
+      res.send('Item already added');
+    } else{
+      const item = new Item({
+        _id : new mongoose.Types.ObjectId,
+        username : req.body.username,
+        description: req.body.description,
+        image : req.body.image
+      });
+      item.save().then(result =>{
+        res.send(result);
+      }).catch(err => res.send(err));
+    }
+  })
+});
+
 // DELETE an item
 
 app.delete('/deleteItem/:id',(req,res)=>{
