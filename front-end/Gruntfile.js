@@ -74,7 +74,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task(s).
-  grunt.registerTask('default', ['sass'], ['csslint'], ['jshint']);
+  grunt.registerTask('default', ['csslint'], ['jshint']);
   grunt.registerTask('ugly', ['cssmin'], ['uglify']);
   grunt.registerTask('watch', ['watch']);
 };
