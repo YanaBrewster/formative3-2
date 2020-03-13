@@ -83,6 +83,7 @@ $(document).ready(function(){
     });//ajax
   });
 
+
   $.ajax({
     url :`${url}/allItems`,
     type :'GET',
@@ -133,3 +134,42 @@ $(document).ready(function(){
   });//ajax
 
 });
+
+// Yanas Code
+
+// UPDATE ITEM FORM ===============================================
+
+  // update item
+  $('#updateItemForm').submit(function(){
+    event.preventDefault();
+
+    let updateItemId = $('#updateItemId').val();
+    let updateItemUsername = $('#updateItemUsername').val();
+    let updateItemDes = $('#updateItemDes').val();
+    let updateItemImage = $('#updateItemImage').val();
+    let userId = $('#userId').val();
+
+    $.ajax({
+      url :`${url}/updateItem/${updateItemId}`,
+      type :'PATCH',
+      data:{
+        username : updateItemUsername,
+        description : updateItemDes,
+        image : updateItemImage,
+        userId : userId
+      },
+      success : function(data){
+        console.log(data);
+
+      },//success
+      error:function(){
+        console.log('error: cannot call api');
+      }//error
+    });//ajax
+  });//submit function for updateItem form
+
+
+
+  // Yanas code ends
+
+
