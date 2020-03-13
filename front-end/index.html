@@ -42,6 +42,7 @@
     <div class="container d-flex flex-column flex-md-row justify-content-between">
       <h4><a id="homeBtn" class="py-2" href="#" aria-label="Product">@Trend</h4>
       <a id="memberName" class="py-2 d-none d-md-inline-block" href="#"></a>
+      
       <a class="py-2 d-none d-md-inline-block" href="#"></a>
       <a class="py-2 d-none d-md-inline-block" href="#"></a>
       <a class="py-2 d-none d-md-inline-block" href="#"></a>
@@ -50,7 +51,7 @@
       <a class="py-2 d-none d-md-inline-block" href="#"></a>
       <a class="py-2 d-none d-md-inline-block" href="#"></a>
       <a class="py-2 d-none d-md-inline-block" href="#"></a>
-      <a class="py-2 d-none d-md-inline-block" href="#"></a>
+      <a id="addProject" class="btn btn-primary btn-sm py-2 d-none" href="#">Add project</a>
         <div id="loginDIV">
           <a id="loginBtn" class="py-2 d-none d-md-inline-block" href="#">Log in</a>
         </div>
@@ -125,9 +126,22 @@
       </div>
 
     </form>
-    <button id="loginSubmitBtn" class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+    <button id="loginSubmitBtn" class="btn btn-sm btn-primary btn-block" type="submit">Log in</button>
   </div>
   <!-- log in page ENDS -->
+
+  <!--add a project form-->
+  <form id="addProjectForm " class="hidden py-5 px-5">
+    <h1 class="text-primary"> Add Product Form </h1>
+
+    <label class="mr-4" for="a-name"> Enter name of the project </label>
+    <input type="text" id="a-name" name="projectName" class="">
+
+    <label class="mr-5" for="a-imageurl"> Enter the image url </label>
+    <input type="text" class="ml-5" id="a-imageurl" name="a-imageurl">
+
+    <button id="addProjectBtn" type="submit" class="btn btn-primary">Add project</button>
+  </form>
 
   <div id="footer">
 

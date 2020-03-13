@@ -19,6 +19,7 @@ $.ajax({
 
 $(document).ready(function(){
   console.log("js is working");
+  
   if (sessionStorage['userName']) {
     console.log('You are logged in');
     $('#logoutDIV').show();
@@ -89,6 +90,8 @@ $(document).ready(function(){
         //Natalia's code
         showMemberName(username);
         $('#banner').hide();
+        $('#addProject').addClass("d-md-inline-block");
+
         //END of Natalia's code
         if (loginData === 'Please fill in all areas') {
           alert('Please fill in all areas')
@@ -240,5 +243,9 @@ $(document).ready(function(){
   function showMemberName(name){
     document.getElementById('memberName').innerHTML = "Hello " + name +"!";
   }
+
+  function addProject(){
+    $('#addProjectForm').removeClass('hidden');
+  } 
 
 });
