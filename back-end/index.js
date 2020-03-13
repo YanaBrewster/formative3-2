@@ -65,6 +65,52 @@ app.use(cors());
 //   })
 // });
 
+// Add Member
+app.post('/addMember', (req,res)=>{
+  Member.findOne({username:req.body.username},(err,memberResult)=>{
+    if (memberResult){
+      res.send('Username taken already. Please try another one');
+    } else{
+      const hash = bcryptjs.hashSync(req.body.password);
+      const member = new Member({
+        _id : new mongoose.Types.ObjectId,
+        username : req.body.username,
+        email : req.body.email,
+        password :hash
+      });
+      member.save().then(result =>{
+        res.send(result);
+      }).catch(err => res.send(err));
+    }
+  })
+});
+
+//get all Member
+app.get('/allMember', (req,res)=>{
+  Member.find().then(result =>{
+    res.send(result);
+  })
+
+});
+
+//Login Member
+app.post('/loginMember', (req, res) =>{
+  Member.findOne({username:req.body.username},(err, memberResult) =>{
+    if (memberResult) {
+      if (bcryptjs.compareSync(req.body.password, memberResult.password)){
+        res.send(memberResult);
+      } else {
+        res.send('Not Authorized');
+      }
+    } else if (req.body.username === "") {
+      res.send('Please fill in all areas');
+    } else {
+      res.send('Member not found. Please register');
+    }
+  });
+});
+
+
 // }
 
 // Yanas code
