@@ -28,7 +28,7 @@ module.exports = function(grunt) {
     watch: {
       all: {
         files: ['sass/style.scss','css/style.css', 'js/script.js'],
-        tasks: ['sass','csslint','jshint'],
+        tasks: ['sass'],
 
       },
     },
@@ -74,7 +74,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task(s).
-  grunt.registerTask('default', ['csslint'], ['jshint']);
+  grunt.registerTask('default', ['sass']);
   grunt.registerTask('ugly', ['cssmin'], ['uglify']);
-  grunt.registerTask('watch', ['watch']);
+
+  // grunt.registerTask('watch', ['watch']); Natalia commented this line because Grunt task 
 };

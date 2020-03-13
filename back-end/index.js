@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcryptjs = require('bcryptjs');
 const config = require('./config.json'); // store creditials
-const item = require('./models/item.js');
+// const item = require('./models/item.js');
 const Item = require('./models/item.js');
 const Member = require('./models/member.js');
 
@@ -122,34 +122,6 @@ app.get('/allItems', (req,res) =>{
   }).catch(err => res.send(err));
 });
 
-// GET one item
-app.get('/items/:id', (req,res) =>{
-  const idParam = req.params.id;
-  Item.findOne({_id:idParam}).then(itemResult =>{
-      res.send(itemResult);
-  }).catch(err => res.send(err)); //refers to mogodb id
-});
-
-//add items
-app.post('/addItem', (req,res) =>{
-  //checking if product is found in the db already
-  Item.findOne({name:req.body.name},(err,itemResult)=>{
-    if (itemResult){
-      res.send('Item already added');
-    } else{
-      const item = new Item({
-        _id : new mongoose.Types.ObjectId,
-        username : req.body.username,
-        description: req.body.description,
-        image : req.body.image
-      });
-      item.save().then(result =>{
-        res.send(result);
-      }).catch(err => res.send(err));
-    }
-  })
-});
-
 // DELETE an item
 app.delete('/deleteItem/:id',(req,res)=>{
   const idParam = req.params.id;
@@ -164,7 +136,67 @@ app.delete('/deleteItem/:id',(req,res)=>{
   }).catch(err => res.send(err)); //refers to mogodb id
 });
 
+// GET one item
+app.get('/items/:id', (req,res) =>{
+  const idParam = req.params.id;
+  Item.findOne({_id:idParam}).then(itemResult =>{
+      res.send(itemResult);
+  }).catch(err => res.send(err)); //refers to mogodb id
+});
+
+// ADD an item
+app.post('/addItem', (req,res) =>{
+  //checking if product is found in the db already
+  Item.findOne({name:req.body.username},(err,itemResult)=>{
+    if (itemResult){
+      res.send('Item already added');
+    } else{
+      const item = new Item({
+        _id : new mongoose.Types.ObjectId,
+        username : req.body.username,
+        description: req.body.description,
+        image : req.body.image,
+        member_id : req.body.memberId
+      });
+      item.save().then(result =>{
+        res.send(result);
+      }).catch(err => res.send(err));
+    }
+  })
+});
 // end of Yanas code
 
+
+//Natalia's code
+
+// UPDATE an item
+app.patch('/updateItem/:id',(req,res)=>{
+  const idParam = req.params.id;
+  Item.findById(idParam,(err,item)=>{
+    //first two checks
+    //when item is not found
+    if(!item){
+      res.send('item not found');
+      return;
+    }
+    //if memberId is not equal to memberId in request
+    // if(item['member_id'] !== req.body.memberId){
+    //   res.send('401 error; user has no permission to update');
+    //   return;
+    // }
+    //this code will be reached only for existing item and the same memberID, so we can safely update
+    const updatedItem ={
+      username:req.body.username,
+      description:req.body.description,
+      image : req.body.image,
+      member_id : req.body.memberId
+    };
+    Item.updateOne({_id:idParam}, updatedItem).then(result=>{
+      res.send(result);
+    }).catch(err=> res.send(err));
+
+  }).catch(err=>res.send('Error'));
+});
+//Natalia's code ENDS
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

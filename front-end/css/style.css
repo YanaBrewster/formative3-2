@@ -21,4 +21,8 @@ a {
   color: white !important;
 }
 
+.hidden {
+  display: none;
+}
+
 /*# sourceMappingURL=style.css.map */
