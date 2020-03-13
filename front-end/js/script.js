@@ -19,7 +19,6 @@ $.ajax({
 
 $(document).ready(function(){
   console.log("js is working");
-
   if (sessionStorage['userName']) {
     console.log('You are logged in');
     $('#logoutDIV').show();
@@ -58,6 +57,9 @@ $(document).ready(function(){
     $('#logoutDIV').hide();
     $('#signUpPage').hide();
     $('#homePage').show();
+    //Natalia's code
+    $('#banner').show();
+    //
     makeCards();
     console.log(sessionStorage);
   })
@@ -84,6 +86,10 @@ $(document).ready(function(){
       },
       success : function(loginData){
         console.log(loginData);
+        //Natalia's code
+        showMemberName(username);
+        $('#banner').hide();
+        //END of Natalia's code
         if (loginData === 'Please fill in all areas') {
           alert('Please fill in all areas')
         }else if (loginData === 'Member not found. Please register') {
@@ -95,6 +101,7 @@ $(document).ready(function(){
           sessionStorage.setItem('userName',loginData['username']);
           sessionStorage.setItem('userEmail',loginData['email']);
           console.log(sessionStorage);
+          
           $('#logoutDIV').show();
           $('#homePage').show();
           makeCards();
@@ -225,7 +232,13 @@ $(document).ready(function(){
   });//submit function for updateItem form
 
 
+  // Yanas code ENDS
 
-  // Yanas code ends
+
+  //Natalia's code
+  
+  function showMemberName(name){
+    document.getElementById('memberName').innerHTML = "Hello " + name +"!";
+  }
 
 });
