@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.6">
-    <title>NK</title>
+    <title>formative3-2</title>
     <link href="css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond|Julius+Sans+One&display=swap" rel="stylesheet">
@@ -44,23 +44,22 @@
       <a class="py-2 d-none d-md-inline-block" href="#"></a>
       <a class="py-2 d-none d-md-inline-block" href="#"></a>
       <a class="py-2 d-none d-md-inline-block" href="#"></a>
-      <a class="py-2 d-none d-md-inline-block" href="#"></a>
       <a class="py-2 d-none d-md-inline-block" href="#">Log in</a>
       <a class="py-2 d-none d-md-inline-block" href="#">Sign up</a>
+      <a class="py-2 d-none d-md-inline-block" href="#">Log out</a>
     </div>
   </nav>
   
+
   <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
     <div class="col-md-8 p-lg-5 mx-auto my-5">
-      <h1 class="display-5 font-weight-normal">Discover latest web designs.</h1>
+      <h1 class="display-5 font-weight-normal">Discover latest design and photography.</h1>
       <p class="lead font-weight-normal"></p>
       <a class="btn btn-secondary" href="#">Discover</a>
     </div>
     <div class="product-device shadow-sm d-none d-md-block"></div>
     <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
   </div>
-  
-  
   <div class="row ml-1 mr-1">
     <div class="col-md-3">
       <div class="card mb-4 shadow-sm">
@@ -156,8 +155,54 @@
   
   
   </div>
+
+<!-- Natalia's code - sign up page -->
+<div id="inputSignup" class="container w-50">
+  <form class="form-signin">
+    <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+
+    <label for="inputEmailSignup" class="sr-only">Email address</label>
+    <input type="email" id="inputEmailSignup" class="form-control mb-2" placeholder="Email address" required autofocus>
+    
+    <label for="inputUserName" class="sr-only">Username</label>
+    <input type="email" id="inputUserNameSignup" class="form-control mb-2" placeholder="Username" required autofocus>
+    
+    <label for="inputPasswordSignup" class="sr-only">Password</label>
+    <input type="password" id="inputPasswordSignup" class="form-control mb-2" placeholder="Password" required>
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button id="signinBtn" class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+    
+  </form>  
+</div>
+
+<!-- sign up page ENDS -->
+
+  <!-- Natalia's code - log in page -->
+  <div id="inputLogin" class="container w-50">
+    <form class="form-signin">
+      <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
+
+      <label for="inputUserName" class="sr-only">Username</label>
+      <input type="email" id="inputUsernameLogin" class="form-control mb-2" placeholder="Email address" required autofocus>
+      
+      <label for="inputPasswordLogin" class="sr-only">Password</label>
+      <input type="password" id="inputPasswordLogin" class="form-control mb-2" placeholder="Password" required>
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+      <button id="loginBtn" class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+      
+    </form>  
   </div>
-  </div>
+  <!-- log in page ENDS -->
   
   <footer class="container py-5">
     <div class="row">
