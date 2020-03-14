@@ -1,30 +1,9 @@
-
-// @import "../bootstrap-4.4.0/scss/functions";
-// @import "../bootstrap-4.4.0/scss/variables";
-// @import "../bootstrap-4.4.0/scss/mixins";
-
-.bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-
-@media (min-width: 768px) {
-  .bd-placeholder-img-lg {
-    font-size: 3.5rem;
-  }
-}
-
-.card-img-top{
-  width: 100%;
-  height: 225px;
-}
-a {
-    color: white!important; 
-}
-.hidden{
-  display:none;
-}
+// yanas code
+@import 'variables';
+@import 'mixins';
+@import 'base';
+@import 'layout';
+@import 'module';
+@import 'state';
+@import 'module';
+@import 'theme';
