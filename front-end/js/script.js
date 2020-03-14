@@ -1,6 +1,7 @@
 console.log(sessionStorage);
 
 let url;
+var tempStorage = {};
 
 //get url and port from config.json
 $.ajax({
@@ -91,6 +92,13 @@ $(document).ready(function(){
     $('#loginPage').hide();
     $('#homePage').hide();
     $('#signUpPage').hide();
+  })
+
+  //project button
+  $('#projectCancelAddBtn').click(function(){
+    $('#pItemCards').show();
+    makeprojectCards()
+    $('#addItemDiv').hide();
   })
 
 
@@ -315,6 +323,54 @@ $(document).ready(function(){
       success : function(loginData){
         console.log(loginData);
 
+      },//success
+      error:function(){
+        console.log('error: cannot call api');
+      }//error
+    });//ajax
+  });//document.ready
+
+  //Add Member
+  $('#signUpSubmitBtn').click(function(){
+    let username = $('#inputUserNameSignup').val();
+    let email = $('#inputEmailSignup').val();
+    let password = $('#inputPasswordSignup').val();
+    let remember = $('#inputRememberSignup').is(":checked");
+    console.log(username,email, password);
+    $.ajax({
+      url :`${url}/addMember`,
+      type :'POST',
+      data:{
+        username : username,
+        email : email,
+        password : password
+        },
+      success : function(loginData){
+        if (remember) {
+          sessionStorage.setItem('memberId',loginData['_id']);
+          sessionStorage.setItem('userName',loginData['username']);
+          sessionStorage.setItem('userEmail',loginData['email']);
+          console.log(sessionStorage);
+
+          $('#logoutDIV').show();
+          $('#projectDIV').show();
+          $('#homePage').show();
+          makeCards();
+          $('#loginDIV').hide();
+          $('#signUpDIV').hide();
+          $('#signUpPage').hide();
+          $('#loginPage').hide();
+
+        } else {
+          $('#logoutDIV').show();
+          $('#projectDIV').show();
+          $('#homePage').show();
+          makeCards();
+          $('#loginDIV').hide();
+          $('#signUpDIV').hide();
+          $('#signUpPage').hide();
+          $('#loginPage').hide();
+        }
       },//success
       error:function(){
         console.log('error: cannot call api');
