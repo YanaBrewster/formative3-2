@@ -1,3 +1,24 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+h1, h3, h5, p, label, input, button {
+  font-family: 'Roboto', sans-serif;
+}
+
+a {
+  font-weight: 600;
+  font-size: 1.25em;
+}
+
+h4 {
+  font-family: 'Squada One', cursive !important;
+  font-weight: 700 !important;
+  font-size: 3em !important;
+}
+
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -23,6 +44,56 @@ a {
 
 .hidden {
   display: none;
+}
+
+.banner-image {
+  background-image: url("../images/Publications_Banner_YanaBrewster.jpg") !important;
+  background-size: cover;
+}
+
+.banner-overlay {
+  position: absolute;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+.banner-heading {
+  position: relative;
+  height: 75vh;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  z-index: -2;
+}
+
+.banner-image {
+  background-image: url("../images/Publications_Banner_YanaBrewster.jpg") !important;
+  background-size: cover;
+}
+
+.banner-overlay {
+  position: absolute;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+.banner-heading {
+  position: relative;
+  height: 75vh;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  z-index: -2;
 }
 
 /*# sourceMappingURL=style.css.map */
