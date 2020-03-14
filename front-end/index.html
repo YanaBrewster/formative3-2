@@ -41,8 +41,8 @@
   <nav class="site-header sticky-top py-1 bg-dark">
     <div class="container d-flex flex-column flex-md-row justify-content-between">
       <h4><a id="homeBtn" class="py-2" href="#" aria-label="Product">@Trend</h4>
-      <a id="memberName" class="py-2 d-none d-md-inline-block" href="#"></a>
-      
+      <p id="memberName" class="py-2 d-none d-md-inline-block" href="#"></p>
+
       <a class="py-2 d-none d-md-inline-block" href="#"></a>
       <a class="py-2 d-none d-md-inline-block" href="#"></a>
       <a class="py-2 d-none d-md-inline-block" href="#"></a>
@@ -51,12 +51,14 @@
       <a class="py-2 d-none d-md-inline-block" href="#"></a>
       <a class="py-2 d-none d-md-inline-block" href="#"></a>
       <a class="py-2 d-none d-md-inline-block" href="#"></a>
-      <a id="addProject" class="btn btn-primary btn-sm py-2 d-none" href="#">Add project</a>
         <div id="loginDIV">
           <a id="loginBtn" class="py-2 d-none d-md-inline-block" href="#">Log in</a>
         </div>
         <div id="logoutDIV">
           <a id="logoutBtn" class="py-2 d-none d-md-inline-block" href="#">Log out</a>
+        </div>
+        <div id="projectDIV">
+          <a id="projectBtn" class="py-2 d-none d-md-inline-block" href="#">My projects</a>
         </div>
         <div id="signUpDIV">
           <a id="signUpBtn" class="py-2 d-none d-md-inline-block" href="#">Sign up</a>
@@ -130,18 +132,36 @@
   </div>
   <!-- log in page ENDS -->
 
-  <!--add a project form-->
-  <form id="addProjectForm " class="hidden py-5 px-5">
-    <h1 class="text-primary"> Add Product Form </h1>
+  <div id="projectPage">
 
-    <label class="mr-4" for="a-name"> Enter name of the project </label>
-    <input type="text" id="a-name" name="projectName" class="">
+    <div id="pItemCards"></div>
 
-    <label class="mr-5" for="a-imageurl"> Enter the image url </label>
-    <input type="text" class="ml-5" id="a-imageurl" name="a-imageurl">
 
-    <button id="addProjectBtn" type="submit" class="btn btn-primary">Add project</button>
-  </form>
+
+    <div id="addItemDiv" class="container w-50">
+
+      <!--add a project form-->
+      <form class="py-5 px-5">
+        <h1 class="text-primary"> Add Project Form </h1>
+
+        <label class="mr-5" for="a-name"> Enter name of the project </label>
+        <input type="text" id="a-name" name="projectName" class="form-control mb-2" placeholder="Project Name" required>
+
+        <label class="mr-5" for="a-description"> Enter a brief description </label>
+        <input type="text"  id="a-description" name="a-description" class="form-control mb-2" placeholder="Description" required>
+
+        <label class="mr-5" for="a-imageurl"> Enter the image url </label>
+        <input type="text"  id="a-imageurl" name="a-imageurl" class="form-control mb-2" placeholder="Image Url" required>
+      </form>
+
+      <button id="projectAddBtn" class="btn btn-sm btn-primary">Add project</button>
+
+      </div>
+
+
+  </div>
+
+
 
   <div id="footer">
 

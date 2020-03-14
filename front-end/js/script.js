@@ -19,27 +19,34 @@ $.ajax({
 
 $(document).ready(function(){
   console.log("js is working");
-  
+
   if (sessionStorage['userName']) {
     console.log('You are logged in');
     $('#logoutDIV').show();
+    $('#projectDIV').show();
     $('#loginDIV').hide();
     $('#signUpDIV').hide();
+    $('#banner').hide();
+    showMemberName(sessionStorage.userName)
   } else {
     console.log('Please login');
     $('#loginDIV').show();
+    $('#signUpDIV').show();
     $('#logoutDIV').hide();
+    $('#projectDIV').hide();
   };
 
   makeCards();
   $('#loginPage').hide();
   $('#signUpPage').hide();
+  $('#projectPage').hide();
 
   //Home button
   $('#homeBtn').click(function(){
     $('#homePage').show();
     $('#loginPage').hide();
     $('#signUpPage').hide();
+    $('#projectPage').hide();
     makeCards();
   })
 
@@ -48,6 +55,7 @@ $(document).ready(function(){
     $('#loginPage').show();
     $('#homePage').hide();
     $('#signUpPage').hide();
+    $('#projectPage').hide();
   })
 
   //logout button
@@ -56,7 +64,9 @@ $(document).ready(function(){
     $('#loginDIV').show();
     $('#signUpDIV').show();
     $('#logoutDIV').hide();
+    $('#projectDIV').hide();
     $('#signUpPage').hide();
+    $('#projectPage').hide();
     $('#homePage').show();
     //Natalia's code
     $('#banner').show();
@@ -65,12 +75,24 @@ $(document).ready(function(){
     console.log(sessionStorage);
   })
 
-  //login button
+  //signup button
   $('#signUpBtn').click(function(){
     $('#signUpPage').show();
     $('#loginPage').hide();
     $('#homePage').hide();
+    $('#projectPage').hide();
   })
+
+  //project button
+  $('#projectBtn').click(function(){
+    $('#projectPage').show();
+    makeprojectCards()
+    $('#addItemDiv').hide();
+    $('#loginPage').hide();
+    $('#homePage').hide();
+    $('#signUpPage').hide();
+  })
+
 
   //get Member JS and login
   $('#loginSubmitBtn').click(function(){
@@ -90,7 +112,6 @@ $(document).ready(function(){
         //Natalia's code
         showMemberName(username);
         $('#banner').hide();
-        $('#addProject').addClass("d-md-inline-block");
 
         //END of Natalia's code
         if (loginData === 'Please fill in all areas') {
@@ -100,12 +121,13 @@ $(document).ready(function(){
         } else if (loginData === 'Not Authorized') {
           alert('Incorrect Password')
         } else if (remember) {
-          sessionStorage.setItem('userId',loginData['_id']);
+          sessionStorage.setItem('memberId',loginData['_id']);
           sessionStorage.setItem('userName',loginData['username']);
           sessionStorage.setItem('userEmail',loginData['email']);
           console.log(sessionStorage);
-          
+
           $('#logoutDIV').show();
+          $('#projectDIV').show();
           $('#homePage').show();
           makeCards();
           $('#loginDIV').hide();
@@ -115,6 +137,7 @@ $(document).ready(function(){
 
         } else {
           $('#logoutDIV').show();
+          $('#projectDIV').show();
           $('#homePage').show();
           makeCards();
           $('#loginDIV').hide();
@@ -138,9 +161,9 @@ $(document).ready(function(){
         console.log(itemsFromMongo);
         document.getElementById('itemCards').innerHTML = "";
 
-        var rowCount = 0;
-        var numOfCols = 4;
-        var cardCount = 1;
+        let rowCount = 0;
+        let numOfCols = 4;
+        let cardCount = 1;
 
         document.getElementById('itemCards').innerHTML = '<div id="itemCardsRow' + rowCount + '" class="row ml-1 mr-1"></div>';
 
@@ -200,6 +223,105 @@ $(document).ready(function(){
     });//ajax
   };
 
+  function makeprojectCards(){
+    $.ajax({
+      url :`${url}/allItems`,
+      type :'GET',
+      dataType :'json',
+      success : function(itemsFromMongo){
+        console.log(itemsFromMongo);
+        document.getElementById('pItemCards').innerHTML = "";
+        document.getElementById('itemCards').innerHTML = "";
+
+        let rowCount = 0;
+        let numOfCols = 4;
+        let cardCount = 1;
+
+        document.getElementById('pItemCards').innerHTML = '<div id="pItemCardsRow' + rowCount + '" class="row ml-1 mr-1"></div>';
+
+        for (var i = 0; i < itemsFromMongo.length; i++) {
+          if ((sessionStorage['userName']) && (itemsFromMongo[i].username === sessionStorage.userName)) {
+            cardCount += (1/numOfCols);
+            console.log(cardCount);
+            if (i/cardCount == numOfCols) {
+              rowCount += 1;
+              document.getElementById('pItemCardsRow' + rowCount).innerHTML +=
+              '<div id="pItemCardsRow' + rowCount + '" class="row ml-1 mr-1"></div>'
+            }
+          }
+          if ((sessionStorage['userName']) && (itemsFromMongo[i].username === sessionStorage.userName)) {
+              document.getElementById('pItemCardsRow' + rowCount).innerHTML +=
+              `<div class="col-md-3">
+              <div class="card mb-4 shadow-sm">
+              <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username} project">
+              <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Test</text>
+              <div class="card-body">
+              <p class="card-text">${itemsFromMongo[i].description}</p>
+              <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+              </div>
+              <small class="text-muted">${itemsFromMongo[i].username}</small>
+              </div>
+              </div>
+              </div>
+              </div>`;
+            }
+        }
+        document.getElementById('pItemCardsRow' + rowCount).innerHTML +=
+        `<div class="col-md-3">
+        <div class="card mb-4 shadow-sm">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSi4cMVLwifOM2O4CyiXIVuFhlnEKVr-4W7tIJ410ternhEe0J_" class="card-img-top text-muted" alt="Add Project">
+        <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+        <button id="addProjectBtn" class="btn btn-primary btn-sm py-2  card-text" href="#">Add project</button>
+        </div>
+        </div>
+        </div>
+        </div>`;
+
+        //add project button
+        $('#addProjectBtn').click(function(){
+          $('#addItemDiv').show();
+          $('#pItemCards').hide();
+
+        })
+      },//success
+      error:function(){
+        console.log('error: cannot call api');
+      }//error
+    });//ajax
+  };
+
+  $('#projectAddBtn').click(function(){
+    console.log('click');
+    let username = sessionStorage.userName;
+    let name = $('#a-name').val();
+    let description = $('#a-description').val();
+    let image = $('#a-imageurl').val();
+    let member_Id = sessionStorage.memberId;
+    console.log(username, name, description, image, member_Id);
+    $.ajax({
+      url :`${url}/addItem`,
+      type :'POST',
+      data:{
+        username :username,
+        name : name,
+        description : description,
+        image : image,
+        member_Id : member_Id
+        },
+      success : function(loginData){
+        console.log(loginData);
+
+      },//success
+      error:function(){
+        console.log('error: cannot call api');
+      }//error
+    });//ajax
+  });//document.ready
+
 
   // Yanas Code
 
@@ -213,7 +335,7 @@ $(document).ready(function(){
     let updateItemUsername = $('#updateItemUsername').val();
     let updateItemDes = $('#updateItemDes').val();
     let updateItemImage = $('#updateItemImage').val();
-    let userId = $('#userId').val();
+    let memberId = $('#memberId').val();
 
     $.ajax({
       url :`${url}/updateItem/${updateItemId}`,
@@ -222,7 +344,7 @@ $(document).ready(function(){
         username : updateItemUsername,
         description : updateItemDes,
         image : updateItemImage,
-        userId : userId
+        memberId : memberId
       },
       success : function(data){
         console.log(data);
@@ -239,13 +361,9 @@ $(document).ready(function(){
 
 
   //Natalia's code
-  
+
   function showMemberName(name){
     document.getElementById('memberName').innerHTML = "Hello " + name +"!";
   }
-
-  function addProject(){
-    $('#addProjectForm').removeClass('hidden');
-  } 
 
 });

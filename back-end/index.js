@@ -147,13 +147,14 @@ app.get('/items/:id', (req,res) =>{
 // ADD an item
 app.post('/addItem', (req,res) =>{
   //checking if product is found in the db already
-  Item.findOne({name:req.body.username},(err,itemResult)=>{
+  Item.findOne({name:req.body.name},(err,itemResult)=>{
     if (itemResult){
       res.send('Item already added');
     } else{
       const item = new Item({
         _id : new mongoose.Types.ObjectId,
         username : req.body.username,
+        name : req.body.name,
         description: req.body.description,
         image : req.body.image,
         member_id : req.body.memberId
@@ -187,6 +188,7 @@ app.patch('/updateItem/:id',(req,res)=>{
     //this code will be reached only for existing item and the same memberID, so we can safely update
     const updatedItem ={
       username:req.body.username,
+      name : req.body.name,
       description:req.body.description,
       image : req.body.image,
       member_id : req.body.memberId
