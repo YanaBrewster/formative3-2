@@ -100,7 +100,7 @@
       <input type="password" id="inputPasswordSignup" class="form-control mb-2" placeholder="Password" required>
       <div class="checkbox mb-3">
         <label>
-          <input type="checkbox" value="remember-me"> Remember me
+          <input id="inputRememberSignup" type="checkbox" value="remember-me"> Remember me
         </label>
       </div>
 
@@ -145,16 +145,26 @@
         <h1 class="text-primary"> Add Project Form </h1>
 
         <label class="mr-5" for="a-name"> Enter name of the project </label>
-        <input type="text" id="a-name" name="projectName" class="form-control mb-2" placeholder="Project Name" required>
+        <input type="text" id="a-name" name="projectName" class="form-control mb-2" placeholder="Project Name" required focusable>
 
         <label class="mr-5" for="a-description"> Enter a brief description </label>
-        <input type="text"  id="a-description" name="a-description" class="form-control mb-2" placeholder="Description" required>
+        <input type="text"  id="a-description" name="a-description" class="form-control mb-2" placeholder="Description" required focusable>
 
         <label class="mr-5" for="a-imageurl"> Enter the image url </label>
-        <input type="text"  id="a-imageurl" name="a-imageurl" class="form-control mb-2" placeholder="Image Url" required>
+        <input type="text"  id="a-imageurl" name="a-imageurl" class="form-control mb-2" placeholder="Image Url" required focusable>
+        <div class="row">
+          <div class="col">
+              <button id="projectCancelAddBtn" class="btn btn-lg btn-outline-danger">Cancel</button>
+          </div>
+            <div class="col"></div>
+          <div class="col">
+            <button id="projectAddBtn" class="btn btn-lg btn-outline-success">Add project</button>
+          </div>
+        </div>
       </form>
 
-      <button id="projectAddBtn" class="btn btn-sm btn-primary">Add project</button>
+
+
 
       </div>
 
