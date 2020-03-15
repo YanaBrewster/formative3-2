@@ -71,6 +71,7 @@ $(document).ready(function(){
     $('#homePage').show();
     //Natalia's code
     $('#banner').show();
+    $('#memberName').empty();
     //
     makeCards();
     console.log(sessionStorage);
@@ -301,7 +302,6 @@ $(document).ready(function(){
     let name = $('#a-name').val();
     let description = $('#a-description').val();
     let image = $('#a-imageurl').val();
-    // let member_id = sessionStorage.memberId;
     console.log(username, name, description, image, memberId);
     console.log(username, name, description, image, memberId);
     $.ajax({
@@ -379,22 +379,21 @@ $(document).ready(function(){
   // UPDATE ITEM FORM ===============================================
 
   // update item
-  $('#updateItemForm').submit(function(){
+  $('#updateProjectForm').submit(function(){
     event.preventDefault();
-
-    let updateItemId = $('#updateItemId').val();
-    let updateItemUsername = $('#updateItemUsername').val();
-    let updateItemDes = $('#updateItemDes').val();
-    let updateItemImage = $('#updateItemImage').val();
+    let projectId = $('#updateItemId').val();
+    let projectUsername = $('#updateItemUsername').val();
+    let projectDescription = $('#updateItemDes').val();
+    let projectImage = $('#updateItemImage').val();
     let memberId = $('#memberId').val();
 
     $.ajax({
       url :`${url}/updateItem/${updateItemId}`,
       type :'PATCH',
       data:{
-        username : updateItemUsername,
-        description : updateItemDes,
-        image : updateItemImage,
+        username : projectUsername,
+        description : projectDescription,
+        image : projectImage,
         memberId : memberId //Natalia changes this line to make this function work
       },
       success : function(data){
@@ -432,8 +431,11 @@ function showMyProjects(){
 
 function renderAllCards(projects){
   for(let i=0; i<projects.length; i++){
-    let card = renderCard(projects[i]);
-    document.getElementById('pItemCards').innerHTML = card;
+    let project = projects[i];
+    let card = renderCard(project);
+    document.getElementById('pItemCards').innerHTML += card;
+    let updatebuttonId = `#"updateProject_${project._id}"`;
+    $(updatebuttonId).click(function(){showUpdateForm(project);});
   }
 }
 
@@ -446,8 +448,8 @@ function renderCard(project){
         <p class="card-text">${project.description}</p>
           <div class="d-flex justify-content-between align-items-center">
           <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+            <button id="deleteProject_${project._id}" type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+            <button id="updateProject_${project._id}" type="button" class="btn btn-sm btn-outline-secondary ">Update</button>
           </div>
           <small class="text-muted">${project.username}</small>
           </div>
@@ -457,3 +459,6 @@ function renderCard(project){
 }
 
 
+function showUpdateForm(project){
+   console.log(project);
+}
