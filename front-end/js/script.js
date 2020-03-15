@@ -21,6 +21,7 @@ $.ajax({
 $(document).ready(function(){
   // console.log("js is working");
 
+  //check if there is any session sessionStorage
   if (sessionStorage['userName']) {
     console.log('You are logged in');
     $('#logoutDIV').show();
@@ -37,6 +38,7 @@ $(document).ready(function(){
     $('#projectDIV').hide();
   }
 
+  //mak home page cards and hide other pages
   makeCards();
   $('#loginPage').hide();
   $('#signUpPage').hide();
@@ -119,18 +121,18 @@ $(document).ready(function(){
       },
       success : function(loginData){
         console.log(loginData);
-        //Natalia's code
-        showMemberName(username);
-        $('#banner').hide();
-
-        //END of Natalia's code
         if (loginData === 'Please fill in all areas') {
           alert('Please fill in all areas')
         }else if (loginData === 'Member not found. Please register') {
           alert('Register please')
         } else if (loginData === 'Not Authorized') {
           alert('Incorrect Password')
-        } else {
+        } else if (remember) {
+          //Natalia's code
+          showMemberName(username);
+          $('#banner').hide();
+          //END of Natalia's code
+
           sessionStorage.setItem('memberId',loginData['_id']);
           sessionStorage.setItem('userName',loginData['username']);
           sessionStorage.setItem('userEmail',loginData['email']);
@@ -145,7 +147,25 @@ $(document).ready(function(){
           $('#signUpPage').hide();
           $('#loginPage').hide();
 
-        } 
+        } else {
+          sessionStorage.setItem('memberId',loginData['_id']);
+          sessionStorage.setItem('userName',loginData['username']);
+          sessionStorage.setItem('userEmail',loginData['email']);
+          console.log(sessionStorage);
+          //Natalia's code
+          showMemberName(username);
+          $('#banner').hide();
+          //END of Natalia's code
+          $('#logoutDIV').show();
+          $('#projectDIV').show();
+          $('#homePage').show();
+          makeCards();
+          $('#loginDIV').hide();
+          $('#signUpDIV').hide();
+          $('#signUpPage').hide();
+          $('#loginPage').hide();
+        }
+
       },//success
       error:function(){
         console.log('error: cannot call api');
@@ -153,6 +173,7 @@ $(document).ready(function(){
     });//ajax
   });
 
+  //make home page cards function
   function makeCards(){
     $.ajax({
       url :`${url}/allItems`,
@@ -177,12 +198,12 @@ $(document).ready(function(){
             '<div id="itemCardsRow' + rowCount + '" class="row ml-1 mr-1"></div>'
           }
 
-          if ((sessionStorage['userName']) && (itemsFromMongo[i].username === sessionStorage.userName)) {
+          if ((sessionStorage['memberId']) && (itemsFromMongo[i].member_Id === sessionStorage.memberId)) {
               document.getElementById('itemCardsRow' + rowCount).innerHTML +=
               `<div class="col-md-3">
               <div class="card mb-4 shadow-sm">
-              <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username} project">
-              <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Test</text>
+              <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username}\'s project">
+              <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${itemsFromMongo[i].name}</text>
               <div class="card-body">
               <p class="card-text">${itemsFromMongo[i].description}</p>
               <div class="d-flex justify-content-between align-items-center">
@@ -200,8 +221,8 @@ $(document).ready(function(){
           document.getElementById('itemCardsRow' + rowCount).innerHTML +=
           `<div class="col-md-3">
           <div class="card mb-4 shadow-sm">
-          <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username} project">
-          <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Test</text>
+          <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username}\'s project">
+          <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${itemsFromMongo[i].name}</text>
           <div class="card-body">
           <p class="card-text">${itemsFromMongo[i].description}</p>
           <div class="d-flex justify-content-between align-items-center">
@@ -224,6 +245,7 @@ $(document).ready(function(){
     });//ajax
   };
 
+  //make My Projects home page cards
   function makeprojectCards(){
     $.ajax({
       url :`${url}/allItems`,
@@ -241,7 +263,7 @@ $(document).ready(function(){
         document.getElementById('pItemCards').innerHTML = '<div id="pItemCardsRow' + rowCount + '" class="row ml-1 mr-1"></div>';
 
         for (var i = 0; i < itemsFromMongo.length; i++) {
-          if ((sessionStorage['userName']) && (itemsFromMongo[i].username === sessionStorage.userName)) {
+          if ((sessionStorage['memberId']) && (itemsFromMongo[i].member_Id === sessionStorage.memberId)) {
             cardCount += (1/numOfCols);
             console.log(cardCount);
             if (i/cardCount == numOfCols) {
@@ -250,12 +272,12 @@ $(document).ready(function(){
               '<div id="pItemCardsRow' + rowCount + '" class="row ml-1 mr-1"></div>';
             }
           }
-          if ((sessionStorage['userName']) && (itemsFromMongo[i].username === sessionStorage.userName)) {
+          if ((sessionStorage['memberId']) && (itemsFromMongo[i].member_Id === sessionStorage.memberId)) {
               document.getElementById('pItemCardsRow' + rowCount).innerHTML +=
               `<div class="col-md-3">
               <div class="card mb-4 shadow-sm">
-              <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username} project">
-              <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Test</text>
+              <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username}\'s project">
+              <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${itemsFromMongo[i].name}</text>
               <div class="card-body">
               <p class="card-text">${itemsFromMongo[i].description}</p>
               <div class="d-flex justify-content-between align-items-center">
@@ -295,6 +317,7 @@ $(document).ready(function(){
     });//ajax
   };
 
+  // Add Project Code
 //Natalia's code
   $('#projectAddBtn').click(function(){
     
@@ -324,7 +347,7 @@ $(document).ready(function(){
   });
   });//document.ready
 
-  //Add Member
+  //Add Member Code
   $('#signUpSubmitBtn').click(function(){
     let username = $('#inputUserNameSignup').val();
     let email = $('#inputEmailSignup').val();
@@ -356,6 +379,10 @@ $(document).ready(function(){
           $('#loginPage').hide();
 
         } else {
+          sessionStorage.setItem('memberId',loginData['_id']);
+          sessionStorage.setItem('userName',loginData['username']);
+          sessionStorage.setItem('userEmail',loginData['email']);
+          console.log(sessionStorage);
           $('#logoutDIV').show();
           $('#projectDIV').show();
           $('#homePage').show();
