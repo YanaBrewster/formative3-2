@@ -9,9 +9,9 @@ $.ajax({
   type :'GET',
   dataType :'json',
   success : function(configData){
-    console.log(configData);
+    // console.log(configData);
     url = `${configData.SERVER_URL}:${configData.SERVER_PORT}`;
-    console.log(url);
+    // console.log(url);
   },//success
   error:function(){
     console.log('error: cannot call api');
@@ -19,8 +19,9 @@ $.ajax({
 });//ajax
 
 $(document).ready(function(){
-  console.log("js is working");
+  // console.log("js is working");
 
+  //check if there is any session sessionStorage
   if (sessionStorage['userName']) {
     console.log('You are logged in');
     $('#logoutDIV').show();
@@ -28,15 +29,16 @@ $(document).ready(function(){
     $('#loginDIV').hide();
     $('#signUpDIV').hide();
     $('#banner').hide();
-    showMemberName(sessionStorage.userName)
+    showMemberName(sessionStorage.userName);
   } else {
     console.log('Please login');
     $('#loginDIV').show();
     $('#signUpDIV').show();
     $('#logoutDIV').hide();
     $('#projectDIV').hide();
-  };
+  }
 
+  //mak home page cards and hide other pages
   makeCards();
   $('#loginPage').hide();
   $('#signUpPage').hide();
@@ -49,7 +51,7 @@ $(document).ready(function(){
     $('#signUpPage').hide();
     $('#projectPage').hide();
     makeCards();
-  })
+  });
 
   //login button
   $('#loginBtn').click(function(){
@@ -57,7 +59,7 @@ $(document).ready(function(){
     $('#homePage').hide();
     $('#signUpPage').hide();
     $('#projectPage').hide();
-  })
+  });
 
   //logout button
   $('#logoutBtn').click(function(){
@@ -71,10 +73,11 @@ $(document).ready(function(){
     $('#homePage').show();
     //Natalia's code
     $('#banner').show();
+    $('#memberName').empty();
     //
     makeCards();
-    console.log(sessionStorage);
-  })
+    // console.log(sessionStorage);
+  });
 
   //signup button
   $('#signUpBtn').click(function(){
@@ -82,24 +85,25 @@ $(document).ready(function(){
     $('#loginPage').hide();
     $('#homePage').hide();
     $('#projectPage').hide();
-  })
+  });
 
   //project button
   $('#projectBtn').click(function(){
     $('#projectPage').show();
-    makeprojectCards()
+    //makeprojectCards();
+    showMyProjects();
     $('#addItemDiv').hide();
     $('#loginPage').hide();
     $('#homePage').hide();
     $('#signUpPage').hide();
-  })
+  });
 
   //project button
   $('#projectCancelAddBtn').click(function(){
     $('#pItemCards').show();
-    makeprojectCards()
+    makeprojectCards();
     $('#addItemDiv').hide();
-  })
+  });
 
 
   //get Member JS and login
@@ -107,7 +111,7 @@ $(document).ready(function(){
     let username = $('#inputUsernameLogin').val();
     let password = $('#inputPasswordLogin').val();
     let remember = $('#inputRememberLogin').is(":checked");
-    console.log(username,password,remember);
+    // console.log(username,password,remember);
     $.ajax({
       url :`${url}/loginMember`,
       type :'POST',
@@ -117,11 +121,6 @@ $(document).ready(function(){
       },
       success : function(loginData){
         console.log(loginData);
-        //Natalia's code
-        showMemberName(username);
-        $('#banner').hide();
-
-        //END of Natalia's code
         if (loginData === 'Please fill in all areas') {
           alert('Please fill in all areas')
         }else if (loginData === 'Member not found. Please register') {
@@ -129,6 +128,11 @@ $(document).ready(function(){
         } else if (loginData === 'Not Authorized') {
           alert('Incorrect Password')
         } else if (remember) {
+          //Natalia's code
+          showMemberName(username);
+          $('#banner').hide();
+          //END of Natalia's code
+
           sessionStorage.setItem('memberId',loginData['_id']);
           sessionStorage.setItem('userName',loginData['username']);
           sessionStorage.setItem('userEmail',loginData['email']);
@@ -144,6 +148,14 @@ $(document).ready(function(){
           $('#loginPage').hide();
 
         } else {
+          sessionStorage.setItem('memberId',loginData['_id']);
+          sessionStorage.setItem('userName',loginData['username']);
+          sessionStorage.setItem('userEmail',loginData['email']);
+          console.log(sessionStorage);
+          //Natalia's code
+          showMemberName(username);
+          $('#banner').hide();
+          //END of Natalia's code
           $('#logoutDIV').show();
           $('#projectDIV').show();
           $('#homePage').show();
@@ -153,6 +165,7 @@ $(document).ready(function(){
           $('#signUpPage').hide();
           $('#loginPage').hide();
         }
+
       },//success
       error:function(){
         console.log('error: cannot call api');
@@ -160,6 +173,7 @@ $(document).ready(function(){
     });//ajax
   });
 
+  //make home page cards function
   function makeCards(){
     $.ajax({
       url :`${url}/allItems`,
@@ -184,12 +198,12 @@ $(document).ready(function(){
             '<div id="itemCardsRow' + rowCount + '" class="row ml-1 mr-1"></div>'
           }
 
-          if ((sessionStorage['userName']) && (itemsFromMongo[i].username === sessionStorage.userName)) {
+          if ((sessionStorage['memberId']) && (itemsFromMongo[i].member_Id === sessionStorage.memberId)) {
               document.getElementById('itemCardsRow' + rowCount).innerHTML +=
               `<div class="col-md-3">
               <div class="card mb-4 shadow-sm">
-              <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username} project">
-              <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Test</text>
+              <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username}\'s project">
+              <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${itemsFromMongo[i].name}</text>
               <div class="card-body">
               <p class="card-text">${itemsFromMongo[i].description}</p>
               <div class="d-flex justify-content-between align-items-center">
@@ -207,8 +221,8 @@ $(document).ready(function(){
           document.getElementById('itemCardsRow' + rowCount).innerHTML +=
           `<div class="col-md-3">
           <div class="card mb-4 shadow-sm">
-          <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username} project">
-          <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Test</text>
+          <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username}\'s project">
+          <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${itemsFromMongo[i].name}</text>
           <div class="card-body">
           <p class="card-text">${itemsFromMongo[i].description}</p>
           <div class="d-flex justify-content-between align-items-center">
@@ -231,6 +245,7 @@ $(document).ready(function(){
     });//ajax
   };
 
+  //make My Projects home page cards
   function makeprojectCards(){
     $.ajax({
       url :`${url}/allItems`,
@@ -248,21 +263,21 @@ $(document).ready(function(){
         document.getElementById('pItemCards').innerHTML = '<div id="pItemCardsRow' + rowCount + '" class="row ml-1 mr-1"></div>';
 
         for (var i = 0; i < itemsFromMongo.length; i++) {
-          if ((sessionStorage['userName']) && (itemsFromMongo[i].username === sessionStorage.userName)) {
+          if ((sessionStorage['memberId']) && (itemsFromMongo[i].member_Id === sessionStorage.memberId)) {
             cardCount += (1/numOfCols);
             console.log(cardCount);
             if (i/cardCount == numOfCols) {
               rowCount += 1;
               document.getElementById('pItemCardsRow' + rowCount).innerHTML +=
-              '<div id="pItemCardsRow' + rowCount + '" class="row ml-1 mr-1"></div>'
+              '<div id="pItemCardsRow' + rowCount + '" class="row ml-1 mr-1"></div>';
             }
           }
-          if ((sessionStorage['userName']) && (itemsFromMongo[i].username === sessionStorage.userName)) {
+          if ((sessionStorage['memberId']) && (itemsFromMongo[i].member_Id === sessionStorage.memberId)) {
               document.getElementById('pItemCardsRow' + rowCount).innerHTML +=
               `<div class="col-md-3">
               <div class="card mb-4 shadow-sm">
-              <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username} project">
-              <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Test</text>
+              <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username}\'s project">
+              <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${itemsFromMongo[i].name}</text>
               <div class="card-body">
               <p class="card-text">${itemsFromMongo[i].description}</p>
               <div class="d-flex justify-content-between align-items-center">
@@ -302,23 +317,24 @@ $(document).ready(function(){
     });//ajax
   };
 
+  // Add Project Code
+//Natalia's code
   $('#projectAddBtn').click(function(){
-    console.log('click');
+    
     let username = sessionStorage.userName;
-    let name = $('#a-name').val();
+    console.log(username);
+    // let name = $('#a-name').val();
     let description = $('#a-description').val();
     let image = $('#a-imageurl').val();
-    let member_Id = sessionStorage.memberId;
-    console.log(username, name, description, image, member_Id);
     $.ajax({
       url :`${url}/addItem`,
       type :'POST',
       data:{
         username :username,
-        name : name,
+        // name : name,
         description : description,
         image : image,
-        member_Id : member_Id
+        memberId : sessionStorage.getItem('memberId') //Natalia changed this line to make this function work (to store memberId in database)
         },
       success : function(loginData){
         console.log(loginData);
@@ -328,9 +344,10 @@ $(document).ready(function(){
         console.log('error: cannot call api');
       }//error
     });//ajax
+  });
   });//document.ready
 
-  //Add Member
+  //Add Member Code
   $('#signUpSubmitBtn').click(function(){
     let username = $('#inputUserNameSignup').val();
     let email = $('#inputEmailSignup').val();
@@ -362,6 +379,10 @@ $(document).ready(function(){
           $('#loginPage').hide();
 
         } else {
+          sessionStorage.setItem('memberId',loginData['_id']);
+          sessionStorage.setItem('userName',loginData['username']);
+          sessionStorage.setItem('userEmail',loginData['email']);
+          console.log(sessionStorage);
           $('#logoutDIV').show();
           $('#projectDIV').show();
           $('#homePage').show();
@@ -384,23 +405,22 @@ $(document).ready(function(){
   // UPDATE ITEM FORM ===============================================
 
   // update item
-  $('#updateItemForm').submit(function(){
+  $('#updateProjectForm').submit(function(){
     event.preventDefault();
-
-    let updateItemId = $('#updateItemId').val();
-    let updateItemUsername = $('#updateItemUsername').val();
-    let updateItemDes = $('#updateItemDes').val();
-    let updateItemImage = $('#updateItemImage').val();
-    let memberId = $('#memberId').val();
+    let projectId = $('#updateProjectId').val();
+    let projectUsername = $('#updateProjectUsername').val();
+    let projectDescription = $('#updateProjectDescription').val();
+    let projectImage = $('#updateProjectImage').val();
+    let memberId = $('#updateMemberId').val();
 
     $.ajax({
-      url :`${url}/updateItem/${updateItemId}`,
+      url :`${url}/updateItem/${projectId}`,
       type :'PATCH',
       data:{
-        username : updateItemUsername,
-        description : updateItemDes,
-        image : updateItemImage,
-        memberId : memberId
+        username : projectUsername,
+        description : projectDescription,
+        image : projectImage,
+        memberId : memberId //Natalia changes this line to make this function work
       },
       success : function(data){
         console.log(data);
@@ -418,8 +438,83 @@ $(document).ready(function(){
 
   //Natalia's code
 
-  function showMemberName(name){
-    document.getElementById('memberName').innerHTML = "Hello " + name +"!";
-  }
+function showMemberName(name){
+  document.getElementById('memberName').innerHTML = "Hello " + name +"!";
+}
 
-});
+function showMyProjects(){
+    $.ajax({
+      url :`${url}/allItems`,
+      type :'GET',
+      dataType :'json',
+      success : function(itemsFromMongo){
+        let currentMemberId = sessionStorage.getItem("memberId");
+        myProjects = itemsFromMongo.filter(item=>item.memberId === currentMemberId);
+        renderAllCards(myProjects);
+        showAddProjectButton();
+      }
+    });
+}; 
+
+
+function showAddProjectButton(){
+  document.getElementById('pItemCards').innerHTML += `<div class="col-md-3">
+  <div class="card mb-4 shadow-sm">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSi4cMVLwifOM2O4CyiXIVuFhlnEKVr-4W7tIJ410ternhEe0J_" class="card-img-top text-muted" alt="Add Project">
+  <div class="card-body">
+  <div class="d-flex justify-content-between align-items-center">
+  <button id="addProjectBtn" onclick="showAddProjectForm()" class="btn btn-primary btn-sm py-2  card-text" href="#">Add project</button>
+  </div>
+  </div>
+  </div>
+  </div>`;
+}
+
+function showAddProjectForm(){
+  $('#addItemDiv').show();
+  $('#pItemCards').hide();
+}
+
+
+
+function renderAllCards(projects){
+  document.getElementById('pItemCards').innerHTML = "";
+  
+  for(let i=0; i<projects.length; i++){
+    let project = projects[i];
+    let card = renderCard(project);
+    document.getElementById('pItemCards').innerHTML += card;
+  }
+}
+
+function renderCard(project){
+  return  `<div class="col-md-3">
+      <div class="card mb-4 shadow-sm">
+      <img src="${project.image}" class="card-img-top text-muted" alt="Picture from ${project.username} project">
+      <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Test</text>
+        <div class="card-body">
+        <p class="card-text">${project.description}</p>
+          <div class="d-flex justify-content-between align-items-center">
+          <div class="btn-group">
+            <button id="deleteProject_${project._id}" type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+            <button onclick="showUpdateForm('${project._id}')" id="updateProject_${project._id}" type="button" class="btn btn-sm btn-outline-secondary ">Update</button>
+          </div>
+          <small class="text-muted">${project.username}</small>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+
+function showUpdateForm(projectId){
+  console.log(projectId);
+  let projects = myProjects.filter(item=>item._id === projectId);
+  let project = projects[0];
+  $('#updateProjectId').val(project._id);
+  $('#updateProjectUsername').val(project.username);
+  $('#updateProjectDescription').val(project.description);
+  $('#updateProjectImage').val(project.image);
+  $('#updateMemberId').val(project.memberId);
+  $('#updateProjectForm').removeClass("d-none");
+}

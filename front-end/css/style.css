@@ -5,7 +5,7 @@
 }
 
 h1, h3, h5, p, label, input, button {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 h1 {
@@ -18,7 +18,7 @@ a {
 }
 
 h4 {
-  font-family: 'Squada One', cursive !important;
+  font-family: "Squada One", cursive !important;
   font-weight: 700 !important;
   font-size: 3em !important;
 }
@@ -54,30 +54,6 @@ a {
   background-image: url("../images/banner.png") !important;
 }
 
-.banner-heading {
-  position: relative;
-  height: 60vh;
-  width: 100%;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  overflow: hidden;
-  z-index: -2;
-}
-
-.banner-overlay {
-  text-align: center;
-  margin: 0 auto;
-  position: absolute;
-  height: 80vh;
-  background-color: rgba(255, 255, 255, 0.7);
-  width: 100%;
-  z-index: -1;
-}
-
-.banner-image {
-  background-image: url("../images/banner.png") !important;
-}
 
 .banner-heading {
   position: relative;
@@ -99,5 +75,6 @@ a {
   width: 100%;
   z-index: -1;
 }
+
 
 /*# sourceMappingURL=style.css.map */
