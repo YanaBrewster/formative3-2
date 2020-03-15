@@ -5,10 +5,10 @@ const mongoose = require('mongoose');  // since we are using Moongoose we have t
 const itemSchema = new mongoose.Schema({
   _id : mongoose.Schema.Types.ObjectId,
   username : String,
-  name : String,
+  // name : String,
   description : String,
   image : String,
-  member_id : {
+  memberId : {
     type : mongoose.Schema.Types.ObjectId,
     ref : 'Member'
   }

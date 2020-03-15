@@ -146,18 +146,18 @@ app.get('/items/:id', (req,res) =>{
 
 // ADD an item
 app.post('/addItem', (req,res) =>{
-  //checking if product is found in the db already
-  Item.findOne({name:req.body.name},(err,itemResult)=>{
+  //Natalia changed line below to be able to add new item, same username, different description
+  Item.findOne({image:req.body.image},(err,itemResult)=>{
     if (itemResult){
       res.send('Item already added');
     } else{
       const item = new Item({
         _id : new mongoose.Types.ObjectId,
         username : req.body.username,
-        name : req.body.name,
+        // name : req.body.name,
         description: req.body.description,
         image : req.body.image,
-        member_id : req.body.memberId
+        memberId : req.body.memberId
       });
       item.save().then(result =>{
         res.send(result);
@@ -191,7 +191,7 @@ app.patch('/updateItem/:id',(req,res)=>{
       name : req.body.name,
       description:req.body.description,
       image : req.body.image,
-      member_id : req.body.memberId
+      memberId : req.body.memberId
     };
     Item.updateOne({_id:idParam}, updatedItem).then(result=>{
       res.send(result);
