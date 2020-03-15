@@ -9,9 +9,9 @@ $.ajax({
   type :'GET',
   dataType :'json',
   success : function(configData){
-    console.log(configData);
+    // console.log(configData);
     url = `${configData.SERVER_URL}:${configData.SERVER_PORT}`;
-    console.log(url);
+    // console.log(url);
   },//success
   error:function(){
     console.log('error: cannot call api');
@@ -19,7 +19,7 @@ $.ajax({
 });//ajax
 
 $(document).ready(function(){
-  console.log("js is working");
+  // console.log("js is working");
 
   if (sessionStorage['userName']) {
     console.log('You are logged in');
@@ -74,7 +74,7 @@ $(document).ready(function(){
     $('#memberName').empty();
     //
     makeCards();
-    console.log(sessionStorage);
+    // console.log(sessionStorage);
   });
 
   //signup button
@@ -109,7 +109,7 @@ $(document).ready(function(){
     let username = $('#inputUsernameLogin').val();
     let password = $('#inputPasswordLogin').val();
     let remember = $('#inputRememberLogin').is(":checked");
-    console.log(username,password,remember);
+    // console.log(username,password,remember);
     $.ajax({
       url :`${url}/loginMember`,
       type :'POST',
@@ -297,13 +297,12 @@ $(document).ready(function(){
 
 //Natalia's code
   $('#projectAddBtn').click(function(){
-    console.log('click');
+    
     let username = sessionStorage.userName;
-    let name = $('#a-name').val();
+    console.log(username);
+    // let name = $('#a-name').val();
     let description = $('#a-description').val();
     let image = $('#a-imageurl').val();
-    console.log(username, name, description, image, memberId);
-    console.log(username, name, description, image, memberId);
     $.ajax({
       url :`${url}/addItem`,
       type :'POST',
@@ -381,14 +380,14 @@ $(document).ready(function(){
   // update item
   $('#updateProjectForm').submit(function(){
     event.preventDefault();
-    let projectId = $('#updateItemId').val();
-    let projectUsername = $('#updateItemUsername').val();
-    let projectDescription = $('#updateItemDes').val();
-    let projectImage = $('#updateItemImage').val();
-    let memberId = $('#memberId').val();
+    let projectId = $('#updateProjectId').val();
+    let projectUsername = $('#updateProjectUsername').val();
+    let projectDescription = $('#updateProjectDescription').val();
+    let projectImage = $('#updateProjectImage').val();
+    let memberId = $('#updateMemberId').val();
 
     $.ajax({
-      url :`${url}/updateItem/${updateItemId}`,
+      url :`${url}/updateItem/${projectId}`,
       type :'PATCH',
       data:{
         username : projectUsername,
@@ -423,19 +422,41 @@ function showMyProjects(){
       dataType :'json',
       success : function(itemsFromMongo){
         let currentMemberId = sessionStorage.getItem("memberId");
-        let myProjects = itemsFromMongo.filter(item=>item.memberId === currentMemberId);
+        myProjects = itemsFromMongo.filter(item=>item.memberId === currentMemberId);
         renderAllCards(myProjects);
+        showAddProjectButton();
       }
     });
 }; 
 
+
+function showAddProjectButton(){
+  document.getElementById('pItemCards').innerHTML += `<div class="col-md-3">
+  <div class="card mb-4 shadow-sm">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSi4cMVLwifOM2O4CyiXIVuFhlnEKVr-4W7tIJ410ternhEe0J_" class="card-img-top text-muted" alt="Add Project">
+  <div class="card-body">
+  <div class="d-flex justify-content-between align-items-center">
+  <button id="addProjectBtn" onclick="showAddProjectForm()" class="btn btn-primary btn-sm py-2  card-text" href="#">Add project</button>
+  </div>
+  </div>
+  </div>
+  </div>`;
+}
+
+function showAddProjectForm(){
+  $('#addItemDiv').show();
+  $('#pItemCards').hide();
+}
+
+
+
 function renderAllCards(projects){
+  document.getElementById('pItemCards').innerHTML = "";
+  
   for(let i=0; i<projects.length; i++){
     let project = projects[i];
     let card = renderCard(project);
     document.getElementById('pItemCards').innerHTML += card;
-    let updatebuttonId = `#"updateProject_${project._id}"`;
-    $(updatebuttonId).click(function(){showUpdateForm(project);});
   }
 }
 
@@ -449,7 +470,7 @@ function renderCard(project){
           <div class="d-flex justify-content-between align-items-center">
           <div class="btn-group">
             <button id="deleteProject_${project._id}" type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
-            <button id="updateProject_${project._id}" type="button" class="btn btn-sm btn-outline-secondary ">Update</button>
+            <button onclick="showUpdateForm('${project._id}')" id="updateProject_${project._id}" type="button" class="btn btn-sm btn-outline-secondary ">Update</button>
           </div>
           <small class="text-muted">${project.username}</small>
           </div>
@@ -459,6 +480,14 @@ function renderCard(project){
 }
 
 
-function showUpdateForm(project){
-   console.log(project);
+function showUpdateForm(projectId){
+  console.log(projectId);
+  let projects = myProjects.filter(item=>item._id === projectId);
+  let project = projects[0];
+  $('#updateProjectId').val(project._id);
+  $('#updateProjectUsername').val(project.username);
+  $('#updateProjectDescription').val(project.description);
+  $('#updateProjectImage').val(project.image);
+  $('#updateMemberId').val(project.memberId);
+  $('#updateProjectForm').removeClass("d-none");
 }
