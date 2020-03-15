@@ -8,6 +8,10 @@ h1, h3, h5, p, label, input, button {
   font-family: 'Roboto', sans-serif;
 }
 
+h1 {
+  font-size: 3em !important;
+}
+
 a {
   font-weight: 600;
   font-size: 1.25em;
@@ -47,53 +51,53 @@ a {
 }
 
 .banner-image {
-  background-image: url("../images/Publications_Banner_YanaBrewster.jpg") !important;
-  background-size: cover;
-}
-
-.banner-overlay {
-  position: absolute;
-  background-color: white;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  opacity: 0.4;
+  background-image: url("../images/banner.png") !important;
 }
 
 .banner-heading {
   position: relative;
-  height: 75vh;
+  height: 60vh;
   width: 100%;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden;
   z-index: -2;
+}
+
+.banner-overlay {
+  text-align: center;
+  margin: 0 auto;
+  position: absolute;
+  height: 80vh;
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  z-index: -1;
 }
 
 .banner-image {
-  background-image: url("../images/Publications_Banner_YanaBrewster.jpg") !important;
-  background-size: cover;
-}
-
-.banner-overlay {
-  position: absolute;
-  background-color: white;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  opacity: 0.4;
+  background-image: url("../images/banner.png") !important;
 }
 
 .banner-heading {
   position: relative;
-  height: 75vh;
+  height: 60vh;
   width: 100%;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden;
   z-index: -2;
+}
+
+.banner-overlay {
+  text-align: center;
+  margin: 0 auto;
+  position: absolute;
+  height: 80vh;
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  z-index: -1;
 }
 
 /*# sourceMappingURL=style.css.map */
