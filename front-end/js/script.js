@@ -28,14 +28,14 @@ $(document).ready(function(){
     $('#loginDIV').hide();
     $('#signUpDIV').hide();
     $('#banner').hide();
-    showMemberName(sessionStorage.userName)
+    showMemberName(sessionStorage.userName);
   } else {
     console.log('Please login');
     $('#loginDIV').show();
     $('#signUpDIV').show();
     $('#logoutDIV').hide();
     $('#projectDIV').hide();
-  };
+  }
 
   makeCards();
   $('#loginPage').hide();
@@ -49,7 +49,7 @@ $(document).ready(function(){
     $('#signUpPage').hide();
     $('#projectPage').hide();
     makeCards();
-  })
+  });
 
   //login button
   $('#loginBtn').click(function(){
@@ -57,7 +57,7 @@ $(document).ready(function(){
     $('#homePage').hide();
     $('#signUpPage').hide();
     $('#projectPage').hide();
-  })
+  });
 
   //logout button
   $('#logoutBtn').click(function(){
@@ -74,7 +74,7 @@ $(document).ready(function(){
     //
     makeCards();
     console.log(sessionStorage);
-  })
+  });
 
   //signup button
   $('#signUpBtn').click(function(){
@@ -82,24 +82,25 @@ $(document).ready(function(){
     $('#loginPage').hide();
     $('#homePage').hide();
     $('#projectPage').hide();
-  })
+  });
 
   //project button
   $('#projectBtn').click(function(){
     $('#projectPage').show();
-    makeprojectCards()
+    //makeprojectCards();
+    showMyProjects();
     $('#addItemDiv').hide();
     $('#loginPage').hide();
     $('#homePage').hide();
     $('#signUpPage').hide();
-  })
+  });
 
   //project button
   $('#projectCancelAddBtn').click(function(){
     $('#pItemCards').show();
-    makeprojectCards()
+    makeprojectCards();
     $('#addItemDiv').hide();
-  })
+  });
 
 
   //get Member JS and login
@@ -128,7 +129,7 @@ $(document).ready(function(){
           alert('Register please')
         } else if (loginData === 'Not Authorized') {
           alert('Incorrect Password')
-        } else if (remember) {
+        } else {
           sessionStorage.setItem('memberId',loginData['_id']);
           sessionStorage.setItem('userName',loginData['username']);
           sessionStorage.setItem('userEmail',loginData['email']);
@@ -143,16 +144,7 @@ $(document).ready(function(){
           $('#signUpPage').hide();
           $('#loginPage').hide();
 
-        } else {
-          $('#logoutDIV').show();
-          $('#projectDIV').show();
-          $('#homePage').show();
-          makeCards();
-          $('#loginDIV').hide();
-          $('#signUpDIV').hide();
-          $('#signUpPage').hide();
-          $('#loginPage').hide();
-        }
+        } 
       },//success
       error:function(){
         console.log('error: cannot call api');
@@ -254,7 +246,7 @@ $(document).ready(function(){
             if (i/cardCount == numOfCols) {
               rowCount += 1;
               document.getElementById('pItemCardsRow' + rowCount).innerHTML +=
-              '<div id="pItemCardsRow' + rowCount + '" class="row ml-1 mr-1"></div>'
+              '<div id="pItemCardsRow' + rowCount + '" class="row ml-1 mr-1"></div>';
             }
           }
           if ((sessionStorage['userName']) && (itemsFromMongo[i].username === sessionStorage.userName)) {
@@ -302,23 +294,25 @@ $(document).ready(function(){
     });//ajax
   };
 
+//Natalia's code
   $('#projectAddBtn').click(function(){
     console.log('click');
     let username = sessionStorage.userName;
     let name = $('#a-name').val();
     let description = $('#a-description').val();
     let image = $('#a-imageurl').val();
-    let member_Id = sessionStorage.memberId;
-    console.log(username, name, description, image, member_Id);
+    // let member_id = sessionStorage.memberId;
+    console.log(username, name, description, image, memberId);
+    console.log(username, name, description, image, memberId);
     $.ajax({
       url :`${url}/addItem`,
       type :'POST',
       data:{
         username :username,
-        name : name,
+        // name : name,
         description : description,
         image : image,
-        member_Id : member_Id
+        memberId : sessionStorage.getItem('memberId') //Natalia changed this line to make this function work (to store memberId in database)
         },
       success : function(loginData){
         console.log(loginData);
@@ -328,6 +322,7 @@ $(document).ready(function(){
         console.log('error: cannot call api');
       }//error
     });//ajax
+  });
   });//document.ready
 
   //Add Member
@@ -400,7 +395,7 @@ $(document).ready(function(){
         username : updateItemUsername,
         description : updateItemDes,
         image : updateItemImage,
-        memberId : memberId
+        memberId : memberId //Natalia changes this line to make this function work
       },
       success : function(data){
         console.log(data);
@@ -418,8 +413,47 @@ $(document).ready(function(){
 
   //Natalia's code
 
-  function showMemberName(name){
-    document.getElementById('memberName').innerHTML = "Hello " + name +"!";
-  }
+function showMemberName(name){
+  document.getElementById('memberName').innerHTML = "Hello " + name +"!";
+}
 
-});
+function showMyProjects(){
+    $.ajax({
+      url :`${url}/allItems`,
+      type :'GET',
+      dataType :'json',
+      success : function(itemsFromMongo){
+        let currentMemberId = sessionStorage.getItem("memberId");
+        let myProjects = itemsFromMongo.filter(item=>item.memberId === currentMemberId);
+        renderAllCards(myProjects);
+      }
+    });
+}; 
+
+function renderAllCards(projects){
+  for(let i=0; i<projects.length; i++){
+    let card = renderCard(projects[i]);
+    document.getElementById('pItemCards').innerHTML = card;
+  }
+}
+
+function renderCard(project){
+  return  `<div class="col-md-3">
+      <div class="card mb-4 shadow-sm">
+      <img src="${project.image}" class="card-img-top text-muted" alt="Picture from ${project.username} project">
+      <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Test</text>
+        <div class="card-body">
+        <p class="card-text">${project.description}</p>
+          <div class="d-flex justify-content-between align-items-center">
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+          </div>
+          <small class="text-muted">${project.username}</small>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+
