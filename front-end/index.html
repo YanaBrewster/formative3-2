@@ -1,1 +1,248 @@
-"delete this"
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.6">
+    <title>formative3-2</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Squada+One&display=swap" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Fontawesome -->
+    <link href="fonts/all.css" rel="stylesheet">
+    <link href="webfonts/fa-brands-400.woff" rel="stylesheet">
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/docs/4.4/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/4.4/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+    <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon.ico">
+    <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
+</head>
+<body>
+  <div id="navbar">
+  <nav class="site-header sticky-top py-1 bg-dark pt-2">
+    <div class="container ml-0 d-flex flex-column flex-md-row justify-content-between">
+      <h4 class="ml-5"><a id="homeBtn" href="#" class="py-2 pb-2" aria-label="Product">@trend</h4>
+      <p id="memberName" class="py-2 d-none d-md-inline-block mr-5" href="#"></p>
+        <div id="loginDIV">
+          <a id="loginBtn" class="py-2 pt-3 d-none d-md-inline-block" href="#">Log in</a>
+        </div>
+        <div id="logoutDIV">
+          <a id="logoutBtn" class="py-2 pt-3 d-none d-md-inline-block" href="#">Log out</a>
+        </div>
+        <div id="projectDIV">
+          <a id="projectBtn" class="py-2 pt-3 d-none d-md-inline-block" href="#">My projects</a>
+        </div>
+        <div id="signUpDIV">
+          <a id="signUpBtn" class="py-2 pt-3 d-none d-md-inline-block" href="#">Sign up</a>
+        </div>
+    </div>
+  </nav>
+
+  <div id="homePage">
+
+<!-- yanas code for BANNER -->
+
+<div class="row pb-5">
+  <div class="col col-sm-12 col-md-12 col-sm-12">
+    <div class="banner-heading banner-image">
+      <div class="banner-overlay">
+      <h1 class="font-weight-normal text-center font-weight-bold pt-5 mt-5">Discover design and photography</h1>
+      <br><p class="lead font-weight-normal"></p>
+    </div>
+    </div>
+  </div>
+</div>
+<!-- yanas code ends -->
+
+  <div id="itemCards">
+
+  </div>
+
+  </div>
+
+  <!-- Natalia's code - sign up page -->
+  <div id="signUpPage" class="container w-50">
+    <form class="form-signin">
+      <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+
+      <label for="inputEmailSignup" class="sr-only">Email address</label>
+      <input type="email" id="inputEmailSignup" class="form-control mb-2" placeholder="Email address" required autofocus>
+
+      <label for="inputUserName" class="sr-only">Username</label>
+      <input type="text" id="inputUserNameSignup" class="form-control mb-2" placeholder="Username" required autofocus>
+
+      <label for="inputPasswordSignup" class="sr-only">Password</label>
+      <input type="password" id="inputPasswordSignup" class="form-control mb-2" placeholder="Password" required>
+      <div class="checkbox mb-3">
+        <label>
+          <input id="inputRememberSignup" type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+
+    </form>
+    <button id="signUpSubmitBtn" class="btn btn-sm btn-primary btn-block" type="submit">Sign up</button>
+  </div>
+  <!-- Sign up page ENDS -->
+
+  <!-- Natalia's code - log in page -->
+  <div id="loginPage" class="container w-50">
+    <form class="form-signin">
+      <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
+
+      <label for="inputUserName" class="sr-only">Username</label>
+      <input type="text" id="inputUsernameLogin" class="form-control mb-2" placeholder="Username" required autofocus>
+
+      <label for="inputPasswordLogin" class="sr-only">Password</label>
+      <input type="password" id="inputPasswordLogin" class="form-control mb-2" placeholder="Password" required>
+      <div class="checkbox mb-3">
+        <label>
+          <input id="inputRememberLogin" type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+
+    </form>
+    <button id="loginSubmitBtn" class="btn btn-sm btn-primary btn-block" type="submit">Log in</button>
+  </div>
+  <!-- Log in page ENDS -->
+
+  <!-- My projects page -->
+  <div id="projectPage">
+    <h3 class="display-5 text-center mt-5 mb-5">My projects</h3>
+    <div class="ml-3 mr-3">
+      <div id="pItemCardsBefore"></div>
+      <div id="pItemCards" class="row"></div>
+    </div>
+
+    <!--Add a project form-->
+    <div id="addItemDiv" class="container w-50">
+      <form class="py-5 px-5">
+        <h1 class="text-primary"> Add Project Form </h1>
+        <label class="mr-5" for="a-name"> Enter name of the project </label>
+        <input type="text" id="a-name" name="projectTitle" class="form-control mb-2" placeholder="Project title" required focusable>
+
+        <label class="mr-5" for="a-description"> Enter a brief description </label>
+        <input type="text"  id="a-description" name="a-description" class="form-control mb-2" placeholder="Description" required focusable>
+
+        <label class="mr-5" for="a-imageurl"> Enter the image url </label>
+        <input type="text"  id="a-imageurl" name="a-imageurl" class="form-control mb-2" placeholder="Image Url" required focusable>
+        <div class="row">
+          <div class="col">
+              <button id="projectCancelAddBtn" class="btn btn-sm btn-outline-danger">Cancel</button>
+          </div>
+            <div class="col"></div>
+          <div class="col">
+            <button id="projectAddBtn" class="btn btn-sm btn-outline-success">Add project</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!--Update project form - Natalia's code -->
+    <div id="updateItemDiv" class="container w-50">
+    <form id="updateProjectForm" class=" d-none py-5 px-5">
+      <h1 class="text-primary"> Update project </h1>
+
+      <input type="hidden" id="updateProjectId"/>
+      <input type="hidden" id="updateProjectMemberId"/>
+      <input type="hidden" id="updateProjectUsername"/>
+      <label class="mr-5" for="a-name"> Enter name of the project </label>
+      <input id="updateProjectTitle" type="text" name="projectName" class="form-control mb-2" placeholder="Project Title" required focusable>
+
+      <label class="mr-5" for="a-description"> Enter a brief description </label>
+      <input id="updateProjectDescription" type="text" name="a-description" class="form-control mb-2" placeholder="Description" required focusable>
+
+      <label class="mr-5" for="a-imageurl"> Enter the image url </label>
+      <input id="updateProjectImage" type="text" name="a-imageurl" class="form-control mb-2" placeholder="Image Url" required focusable>
+
+     
+    </form>
+    <div class="row">
+      <div class="col">
+          <button id="projectCancelUpdateBtn" class="btn btn-sm btn-outline-danger">Cancel</button>
+      </div>
+        <div class="col"></div>
+      <div class="col">
+        <button id="projectUpdateBtn" class="btn btn-sm btn-outline-success" >Update project</button>
+      </div>
+    </div>
+    </div>
+
+    <!--delete project form - Natalia's code -->
+    <div id="deleteItemDiv" class="container w-50">
+      <form id="deleteProjectForm" class=" d-none py-5 px-5">
+        <h1 class="text-primary"> Are you sure you want to delete project? </h1>
+        <input type="hidden" id="deleteProjectId"/>
+        <div class="row">
+          <div class="col">
+              <button id="projectCancelDeleteBtn" class="btn btn-sm btn-outline-danger">Cancel</button>
+          </div>
+            <div class="col"></div>
+          <div class="col">
+            <button id="projectDeleteBtn" class="btn btn-sm btn-outline-success">Delete project</button>
+          </div>
+        </div>
+      </form>
+      </div>
+
+  </div>
+
+
+
+  <div id="footer">
+
+
+  <footer class="container py-5">
+    <div class="row">
+      <div class="col-12 col-md">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mb-2" role="img" viewBox="0 0 24 24" focusable="false"><title>Product</title><circle cx="12" cy="12" r="10"/><path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/></svg>
+        <small class="d-block mb-3 text-muted">&copy; 2017-2019</small>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Features</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Cool stuff</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Resources</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Resource</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Resources</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Education</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>About</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Team</a></li>
+          <li><a class="text-muted" href="#">Locations</a></li>
+          <li><a class="text-muted" href="#">Privacy</a></li>
+          <li><a class="text-muted" href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  </div>
+
+<script src="node_modules\jquery\dist\jquery.min.js"></script>
+<script src="node_modules\popper.js\dist\umd\popper.min.js"></script>
+<script src="node_modules\bootstrap\dist\js\bootstrap.min.js"></script>
+<!-- <script src="js/config.json"></script> -->
+<script src="js/script.js"></script>
+<!-- <script src="js/script.min.js"></script> -->
+</body>
+</html>

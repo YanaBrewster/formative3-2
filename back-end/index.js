@@ -74,6 +74,7 @@ app.post('/addMember', (req,res)=>{
       const hash = bcryptjs.hashSync(req.body.password);
       const member = new Member({
         _id : new mongoose.Types.ObjectId,
+        title: req.body.title,
         username : req.body.username,
         email : req.body.email,
         password :hash
@@ -122,8 +123,8 @@ app.get('/allItems', (req,res) =>{
   }).catch(err => res.send(err));
 });
 
-// DELETE an item
-app.delete('/deleteItem/:id',(req,res)=>{
+// DELETE an project
+app.delete('/deleteProject/:id',(req,res)=>{
   const idParam = req.params.id;
   Item.findOne({_id:idParam}, (err,item)=>{
     if (item){
@@ -147,14 +148,14 @@ app.get('/items/:id', (req,res) =>{
 // ADD an item
 app.post('/addItem', (req,res) =>{
   //Natalia changed line below to be able to add new item, same username, different description
-  Item.findOne({image:req.body.image},(err,itemResult)=>{
+  Item.findOne({image:req.body.title},(err,itemResult)=>{
     if (itemResult){
       res.send('Item already added');
     } else{
       const item = new Item({
-        _id : new mongoose.Types.ObjectId,
+        
         username : req.body.username,
-        // name : req.body.name,
+        title : req.body.title,
         description: req.body.description,
         image : req.body.image,
         memberId : req.body.memberId
@@ -187,8 +188,9 @@ app.patch('/updateItem/:id',(req,res)=>{
     // }
     //this code will be reached only for existing item and the same memberID, so we can safely update
     const updatedItem ={
+      _id:idParam,
       username:req.body.username,
-      name : req.body.name,
+      title : req.body.title,
       description:req.body.description,
       image : req.body.image,
       memberId : req.body.memberId

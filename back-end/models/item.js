@@ -5,7 +5,7 @@ const mongoose = require('mongoose');  // since we are using Moongoose we have t
 const itemSchema = new mongoose.Schema({
   _id : mongoose.Schema.Types.ObjectId,
   username : String,
-  // name : String,
+  title : String,
   description : String,
   image : String,
   memberId : {
