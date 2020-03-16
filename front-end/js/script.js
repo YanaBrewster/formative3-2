@@ -1,7 +1,9 @@
 console.log(sessionStorage);
+console.log(sessionStorage['memberId']);
 
 let url;
 var tempStorage = {};
+sessionStorage;
 
 //get url and port from config.json
 $.ajax({
@@ -206,7 +208,7 @@ $(document).ready(function(){
             `<div class="col-md-3">
             <div class="card mb-4 shadow-sm">
             <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username}\'s project">
-            <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${itemsFromMongo[i].title}</text>
+            <strong>${itemsFromMongo[i].title}</strong>
             <div class="card-body">
             <p class="card-text">${itemsFromMongo[i].description}</p>
             <div class="d-flex justify-content-between align-items-center">
@@ -225,8 +227,9 @@ $(document).ready(function(){
             `<div class="col-md-3">
             <div class="card mb-4 shadow-sm">
             <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username}\'s project">
-            <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${itemsFromMongo[i].title}</text>
+            
             <div class="card-body">
+            <strong>${itemsFromMongo[i].title}</strong>
             <p class="card-text">${itemsFromMongo[i].description}</p>
             <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
@@ -279,8 +282,8 @@ $(document).ready(function(){
             document.getElementById('pItemCardsRow' + rowCount).innerHTML +=
             `<div class="col-md-3">
             <div class="card mb-4 shadow-sm">
-            <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username}\'s project">
-            <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${itemsFromMongo[i].title}</text>
+            <img src="${itemsFromMongo[i].image}" class="card-img-top p-4 text-muted" alt="Picture from ${itemsFromMongo[i].username}\'s project">
+            <strong class="text-bold">${itemsFromMongo[i].title}</strong>
             <div class="card-body">
             <p class="card-text">${itemsFromMongo[i].description}</p>
             <div class="d-flex justify-content-between align-items-center">
@@ -323,10 +326,9 @@ $(document).ready(function(){
   // Add Project Code
   //Natalia's code
   $('#projectAddBtn').click(function(){
-
     let username = sessionStorage.userName;
-    console.log(username);
     let title = $('#a-name').val();
+    console.log(title);
     let description = $('#a-description').val();
     let image = $('#a-imageurl').val();
     $.ajax({
@@ -408,7 +410,7 @@ $('#signUpSubmitBtn').click(function(){
 // UPDATE ITEM FORM ===============================================
 
 // update item
-$('#updateProjectForm').submit(function(){
+$('#projectUpdateBtn').submit(function(){
   event.preventDefault();
   let projectId = $('#updateProjectId').val();
   let projectUsername = $('#updateProjectUsername').val();
@@ -422,10 +424,10 @@ $('#updateProjectForm').submit(function(){
     type :'PATCH',
     data:{
       username : projectUsername,
-      title: title,
+      title: projectTitle,
       description : projectDescription,
       image : projectImage,
-      memberId : memberId //Natalia changes this line to make this function work
+      memberId : memberId
     },
     success : function(data){
       console.log(data);
@@ -437,48 +439,34 @@ $('#updateProjectForm').submit(function(){
   });//ajax
 });//submit function for updateItem form
 
-// Delete project
-$('#deleteProductBtn').click(function(){
-  $('#deleteProductForm').show();
-  $('#productForm').hide();
-  $('#addProductForm').hide();
-  $('#deleteForm').submit(function(){
-    event.preventDefault();
-    if(!sessionStorage['userId']){
-      alert('401, permission denied');
-      return;
-    };
-    let  productId = $('#deleteProductId').val();
-    console.log(productId);
-    if (productId == '') {
-      alert('Please enter product id');
-    } else { $.ajax({
-      url :`${url}/deleteProduct/${productId}`,
-      type :'DELETE',
-      data:{
-        userId: sessionStorage['userId']
-      },
-      success : function(data){
-        console.log(data);
-        if (data=='deleted'){
-          alert('deleted');
-          $('#deleteProductId').val('');
-        } else {
-          alert('Enter a valid id');
-        }
-      },//success
-      error:function(){
-        console.log('error: cannot call api');
-      }//error
-    });//ajax
-  }
-});//submit function for delete product
-});
 // Yanas code ENDS
 
+// Yana and Natalia 
+// Delete project
+
+$('#projectDeleteBtn').on('click',function(){
+  // event.preventDefault();
+  let projectId = $('#deleteProjectId').val();
+  console.log(projectId);
+    $.ajax({
+    url :`${url}/deleteProject/${projectId}`,
+    type :'DELETE',
+    success : function(data){
+      console.log(data);
+      if (data=='deleted'){
+        alert('deleted');
+        $('#deleteProjectId').val('');
+      } else {
+        alert('Error while deleting project');
+      }
+    },//success
+    error:function(){
+      console.log('error: cannot call api');
+    }//error
+  });//ajax
+});
 
 //Natalia's code
-
 function showMemberName(name){
   document.getElementById('memberName').innerHTML = "Hello " + name +"!";
 }
@@ -518,7 +506,6 @@ function showAddProjectForm(){
 
 function renderAllCards(projects){
   document.getElementById('pItemCards').innerHTML = "";
-
   for(let i=0; i<projects.length; i++){
     let project = projects[i];
     let card = renderCard(project);
@@ -531,11 +518,12 @@ function renderCard(project){
   <div class="card mb-4 shadow-sm">
   <img src="${project.image}" class="card-img-top text-muted" alt="Picture from ${project.username} project">
   <div class="card-body">
+  <strong>${project.title}</strong>
   <p class="card-text">${project.description}</p>
   <div class="d-flex justify-content-between align-items-center">
   <div class="btn-group">
-  <button id="deleteProject_${project._id}" type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
-  <button onclick="showUpdateForm('${project._id}')" id="updateProject_${project._id}" type="button" class="btn btn-sm btn-outline-secondary ">Update</button>
+  <button id="deleteProject_${project._id}" onclick="showDeleteForm('${project._id}')" type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+  <button id="updateProject_${project._id}" onclick="showUpdateForm('${project._id}')" type="button" class="btn btn-sm btn-outline-secondary ">Update</button>
   </div>
   <small class="text-muted">${project.username}</small>
   </div>
@@ -548,14 +536,26 @@ function showUpdateForm(projectId){
   $('#updateItemDiv').show();
   $('#pItemCards').hide();
   $('#pItemCardsBefore').hide();
-  console.log(projectId);
+  // console.log(projectId);
   let projects = myProjects.filter(item=>item._id === projectId);
   let project = projects[0];
   $('#updateProjectId').val(project._id);
   $('#updateProjectUsername').val(project.username);
-  $('#updateProjectUsername').val(project.title);
+  $('#updateProjectTitle').val(project.title);
   $('#updateProjectDescription').val(project.description);
   $('#updateProjectImage').val(project.image);
   $('#updateMemberId').val(project.memberId);
   $('#updateProjectForm').removeClass("d-none");
 }
+
+function showDeleteForm(projectId){
+  $('#deleteItemDiv').show();
+  $('#pItemCards').hide();
+  $('#pItemCardsBefore').hide();
+  // console.log(projectId);
+  let projects = myProjects.filter(item=>item._id === projectId);
+  let project = projects[0];
+  $('#deleteProjectId').val(project._id);
+  $('#deleteProjectForm').removeClass("d-none");
+}
+

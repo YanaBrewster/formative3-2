@@ -123,8 +123,8 @@ app.get('/allItems', (req,res) =>{
   }).catch(err => res.send(err));
 });
 
-// DELETE an item
-app.delete('/deleteItem/:id',(req,res)=>{
+// DELETE an project
+app.delete('/deleteProject/:id',(req,res)=>{
   const idParam = req.params.id;
   Item.findOne({_id:idParam}, (err,item)=>{
     if (item){
@@ -189,7 +189,7 @@ app.patch('/updateItem/:id',(req,res)=>{
     //this code will be reached only for existing item and the same memberID, so we can safely update
     const updatedItem ={
       username:req.body.username,
-      title : req.body.name,
+      title : req.body.title,
       description:req.body.description,
       image : req.body.image,
       memberId : req.body.memberId
