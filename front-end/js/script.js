@@ -520,12 +520,13 @@ function renderCard(project){
   <div class="card-body">
   <strong>${project.title}</strong>
   <p class="card-text">${project.description}</p>
+  <small class="text-muted">Author: ${project.username}</small>
   <div class="d-flex justify-content-between align-items-center">
   <div class="btn-group">
   <button id="deleteProject_${project._id}" onclick="showDeleteForm('${project._id}')" type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
   <button id="updateProject_${project._id}" onclick="showUpdateForm('${project._id}')" type="button" class="btn btn-sm btn-outline-secondary ">Update</button>
   </div>
-  <small class="text-muted">${project.username}</small>
+  
   </div>
   </div>
   </div>
