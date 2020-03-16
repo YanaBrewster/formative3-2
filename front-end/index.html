@@ -151,7 +151,8 @@
       <h1 class="text-primary"> Update project </h1>
 
       <input type="hidden" id="updateProjectId"/>
-      <input type="hidden" id="updateMemberId"/>
+      <input type="hidden" id="updateProjectMemberId"/>
+      <input type="hidden" id="updateProjectUsername"/>
       <label class="mr-5" for="a-name"> Enter name of the project </label>
       <input id="updateProjectTitle" type="text" name="projectName" class="form-control mb-2" placeholder="Project Title" required focusable>
 
@@ -161,16 +162,17 @@
       <label class="mr-5" for="a-imageurl"> Enter the image url </label>
       <input id="updateProjectImage" type="text" name="a-imageurl" class="form-control mb-2" placeholder="Image Url" required focusable>
 
-      <div class="row">
-        <div class="col">
-            <button id="projectCancelUpdateBtn" class="btn btn-sm btn-outline-danger">Cancel</button>
-        </div>
-          <div class="col"></div>
-        <div class="col">
-          <button id="projectUpdateBtn" class="btn btn-sm btn-outline-success" type="submit">Update project</button>
-        </div>
-      </div>
+     
     </form>
+    <div class="row">
+      <div class="col">
+          <button id="projectCancelUpdateBtn" class="btn btn-sm btn-outline-danger">Cancel</button>
+      </div>
+        <div class="col"></div>
+      <div class="col">
+        <button id="projectUpdateBtn" class="btn btn-sm btn-outline-success" >Update project</button>
+      </div>
+    </div>
     </div>
 
     <!--delete project form - Natalia's code -->

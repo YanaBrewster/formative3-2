@@ -153,7 +153,7 @@ app.post('/addItem', (req,res) =>{
       res.send('Item already added');
     } else{
       const item = new Item({
-        _id : new mongoose.Types.ObjectId,
+        
         username : req.body.username,
         title : req.body.title,
         description: req.body.description,
@@ -188,6 +188,7 @@ app.patch('/updateItem/:id',(req,res)=>{
     // }
     //this code will be reached only for existing item and the same memberID, so we can safely update
     const updatedItem ={
+      _id:idParam,
       username:req.body.username,
       title : req.body.title,
       description:req.body.description,

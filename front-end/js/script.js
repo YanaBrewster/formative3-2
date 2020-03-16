@@ -410,19 +410,21 @@ $('#signUpSubmitBtn').click(function(){
 // UPDATE ITEM FORM ===============================================
 
 // update item
-$('#projectUpdateBtn').submit(function(){
+$('#projectUpdateBtn').click(function(){
+  console.log('button pressed');
   event.preventDefault();
   let projectId = $('#updateProjectId').val();
   let projectUsername = $('#updateProjectUsername').val();
   let projectTitle = $('#updateProjectTitle').val();
   let projectDescription = $('#updateProjectDescription').val();
   let projectImage = $('#updateProjectImage').val();
-  let memberId = $('#updateMemberId').val();
+  let memberId = $('#updateProjectMemberId').val();
 
   $.ajax({
     url :`${url}/updateItem/${projectId}`,
     type :'PATCH',
     data:{
+      _id: projectId,
       username : projectUsername,
       title: projectTitle,
       description : projectDescription,
@@ -545,7 +547,7 @@ function showUpdateForm(projectId){
   $('#updateProjectTitle').val(project.title);
   $('#updateProjectDescription').val(project.description);
   $('#updateProjectImage').val(project.image);
-  $('#updateMemberId').val(project.memberId);
+  $('#updateProjectMemberId').val(project.memberId);
   $('#updateProjectForm').removeClass("d-none");
 }
 
