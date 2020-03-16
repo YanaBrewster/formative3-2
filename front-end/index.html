@@ -140,14 +140,18 @@
   <!-- My projects page -->
   <div id="projectPage">
     <h3 class="display-5 text-center mt-5 mb-5">My projects</h3>
-    <div id="pItemCards"></div>
+    <div class="container">
+      <div id="pItemCardsBefore"></div>
+      <div id="pItemCards" class="row"></div>
+    </div>
+
     <!--Add a project form-->
     <div id="addItemDiv" class="container w-50">
       <form class="py-5 px-5">
         <h1 class="text-primary"> Add Project Form </h1>
 
         <label class="mr-5" for="a-name"> Enter name of the project </label>
-        <input type="text" id="a-name" name="projectName" class="form-control mb-2" placeholder="Project Name" required focusable>
+        <input type="text" id="a-name" name="projectTitle" class="form-control mb-2" placeholder="Project title" required focusable>
 
         <label class="mr-5" for="a-description"> Enter a brief description </label>
         <input type="text"  id="a-description" name="a-description" class="form-control mb-2" placeholder="Description" required focusable>
@@ -167,20 +171,21 @@
     </div>
 
     <!--Update project form - Natalia's code -->
+    <div id="updateItemDiv" class="container w-50">
     <form id="updateProjectForm" class=" d-none py-5 px-5">
       <h1 class="text-primary"> Update project </h1>
 
       <input type="hidden" id="updateProjectId"/>
       <input type="hidden" id="updateMemberId"/>
       <label class="mr-5" for="a-name"> Enter name of the project </label>
-      <input id="updateProjectUsername" type="text" name="projectName" class="form-control mb-2" placeholder="Project Name" required focusable>
+      <input id="updateProjectTitle" type="text" name="projectName" class="form-control mb-2" placeholder="Project Title" required focusable>
 
       <label class="mr-5" for="a-description"> Enter a brief description </label>
       <input id="updateProjectDescription" type="text" name="a-description" class="form-control mb-2" placeholder="Description" required focusable>
 
       <label class="mr-5" for="a-imageurl"> Enter the image url </label>
       <input id="updateProjectImage" type="text" name="a-imageurl" class="form-control mb-2" placeholder="Image Url" required focusable>
-      
+
       <div class="row">
         <div class="col">
             <button id="projectCancelAddBtn" class="btn btn-lg btn-outline-danger">Cancel</button>
@@ -191,6 +196,7 @@
         </div>
       </div>
     </form>
+    </div>
 
 
 

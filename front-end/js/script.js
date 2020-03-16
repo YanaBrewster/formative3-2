@@ -92,6 +92,9 @@ $(document).ready(function(){
     $('#projectPage').show();
     //makeprojectCards();
     showMyProjects();
+    $('#updateItemDiv').hide();
+    $('#pItemCards').show();
+    $('#pItemCardsBefore').show();
     $('#addItemDiv').hide();
     $('#loginPage').hide();
     $('#homePage').hide();
@@ -199,43 +202,43 @@ $(document).ready(function(){
           }
 
           if ((sessionStorage['memberId']) && (itemsFromMongo[i].member_Id === sessionStorage.memberId)) {
-              document.getElementById('itemCardsRow' + rowCount).innerHTML +=
-              `<div class="col-md-3">
-              <div class="card mb-4 shadow-sm">
-              <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username}\'s project">
-              <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${itemsFromMongo[i].name}</text>
-              <div class="card-body">
-              <p class="card-text">${itemsFromMongo[i].description}</p>
-              <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-              </div>
-              <small class="text-muted">${itemsFromMongo[i].username}</small>
-              </div>
-              </div>
-              </div>
-              </div>`;
+            document.getElementById('itemCardsRow' + rowCount).innerHTML +=
+            `<div class="col-md-3">
+            <div class="card mb-4 shadow-sm">
+            <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username}\'s project">
+            <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${itemsFromMongo[i].title}</text>
+            <div class="card-body">
+            <p class="card-text">${itemsFromMongo[i].description}</p>
+            <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <small class="text-muted">${itemsFromMongo[i].username}</small>
+            </div>
+            </div>
+            </div>
+            </div>`;
 
-        } else {
-          document.getElementById('itemCardsRow' + rowCount).innerHTML +=
-          `<div class="col-md-3">
-          <div class="card mb-4 shadow-sm">
-          <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username}\'s project">
-          <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${itemsFromMongo[i].name}</text>
-          <div class="card-body">
-          <p class="card-text">${itemsFromMongo[i].description}</p>
-          <div class="d-flex justify-content-between align-items-center">
-          <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-          </div>
-          <small class="text-muted">${itemsFromMongo[i].username}</small>
-          </div>
-          </div>
-          </div>
-          </div>`
-          ;
-        }
+          } else {
+            document.getElementById('itemCardsRow' + rowCount).innerHTML +=
+            `<div class="col-md-3">
+            <div class="card mb-4 shadow-sm">
+            <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username}\'s project">
+            <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${itemsFromMongo[i].title}</text>
+            <div class="card-body">
+            <p class="card-text">${itemsFromMongo[i].description}</p>
+            <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+            </div>
+            <small class="text-muted">${itemsFromMongo[i].username}</small>
+            </div>
+            </div>
+            </div>
+            </div>`
+            ;
+          }
 
         }
       },//success
@@ -273,24 +276,24 @@ $(document).ready(function(){
             }
           }
           if ((sessionStorage['memberId']) && (itemsFromMongo[i].member_Id === sessionStorage.memberId)) {
-              document.getElementById('pItemCardsRow' + rowCount).innerHTML +=
-              `<div class="col-md-3">
-              <div class="card mb-4 shadow-sm">
-              <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username}\'s project">
-              <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${itemsFromMongo[i].name}</text>
-              <div class="card-body">
-              <p class="card-text">${itemsFromMongo[i].description}</p>
-              <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-              </div>
-              <small class="text-muted">${itemsFromMongo[i].username}</small>
-              </div>
-              </div>
-              </div>
-              </div>`;
-            }
+            document.getElementById('pItemCardsRow' + rowCount).innerHTML +=
+            `<div class="col-md-3">
+            <div class="card mb-4 shadow-sm">
+            <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username}\'s project">
+            <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">${itemsFromMongo[i].title}</text>
+            <div class="card-body">
+            <p class="card-text">${itemsFromMongo[i].description}</p>
+            <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+            <small class="text-muted">${itemsFromMongo[i].username}</small>
+            </div>
+            </div>
+            </div>
+            </div>`;
+          }
         }
         document.getElementById('pItemCardsRow' + rowCount).innerHTML +=
         `<div class="col-md-3">
@@ -318,12 +321,12 @@ $(document).ready(function(){
   };
 
   // Add Project Code
-//Natalia's code
+  //Natalia's code
   $('#projectAddBtn').click(function(){
-    
+
     let username = sessionStorage.userName;
     console.log(username);
-    // let name = $('#a-name').val();
+    let title = $('#a-name').val();
     let description = $('#a-description').val();
     let image = $('#a-imageurl').val();
     $.ajax({
@@ -331,11 +334,11 @@ $(document).ready(function(){
       type :'POST',
       data:{
         username :username,
-        // name : name,
+        title : title,
         description : description,
         image : image,
         memberId : sessionStorage.getItem('memberId') //Natalia changed this line to make this function work (to store memberId in database)
-        },
+      },
       success : function(loginData){
         console.log(loginData);
 
@@ -345,120 +348,158 @@ $(document).ready(function(){
       }//error
     });//ajax
   });
-  });//document.ready
+});//document.ready
 
-  //Add Member Code
-  $('#signUpSubmitBtn').click(function(){
-    let username = $('#inputUserNameSignup').val();
-    let email = $('#inputEmailSignup').val();
-    let password = $('#inputPasswordSignup').val();
-    let remember = $('#inputRememberSignup').is(":checked");
-    console.log(username,email, password);
-    $.ajax({
-      url :`${url}/addMember`,
-      type :'POST',
+//Add Member Code
+$('#signUpSubmitBtn').click(function(){
+  let username = $('#inputUserNameSignup').val();
+  let email = $('#inputEmailSignup').val();
+  let password = $('#inputPasswordSignup').val();
+  let remember = $('#inputRememberSignup').is(":checked");
+  console.log(username,email, password);
+  $.ajax({
+    url :`${url}/addMember`,
+    type :'POST',
+    data:{
+      username : username,
+      email : email,
+      password : password
+    },
+    success : function(loginData){
+      if (remember) {
+        sessionStorage.setItem('memberId',loginData['_id']);
+        sessionStorage.setItem('userName',loginData['username']);
+        sessionStorage.setItem('userEmail',loginData['email']);
+        console.log(sessionStorage);
+
+        $('#logoutDIV').show();
+        $('#projectDIV').show();
+        $('#homePage').show();
+        makeCards();
+        $('#loginDIV').hide();
+        $('#signUpDIV').hide();
+        $('#signUpPage').hide();
+        $('#loginPage').hide();
+
+      } else {
+        sessionStorage.setItem('memberId',loginData['_id']);
+        sessionStorage.setItem('userName',loginData['username']);
+        sessionStorage.setItem('userEmail',loginData['email']);
+        console.log(sessionStorage);
+        $('#logoutDIV').show();
+        $('#projectDIV').show();
+        $('#homePage').show();
+        makeCards();
+        $('#loginDIV').hide();
+        $('#signUpDIV').hide();
+        $('#signUpPage').hide();
+        $('#loginPage').hide();
+      }
+    },//success
+    error:function(){
+      console.log('error: cannot call api');
+    }//error
+  });//ajax
+});//document.ready
+
+
+// Yanas Code
+
+// UPDATE ITEM FORM ===============================================
+
+// update item
+$('#updateProjectForm').submit(function(){
+  event.preventDefault();
+  let projectId = $('#updateProjectId').val();
+  let projectUsername = $('#updateProjectUsername').val();
+  let projectTitle = $('#updateProjectTitle').val();
+  let projectDescription = $('#updateProjectDescription').val();
+  let projectImage = $('#updateProjectImage').val();
+  let memberId = $('#updateMemberId').val();
+
+  $.ajax({
+    url :`${url}/updateItem/${projectId}`,
+    type :'PATCH',
+    data:{
+      username : projectUsername,
+      title: title,
+      description : projectDescription,
+      image : projectImage,
+      memberId : memberId //Natalia changes this line to make this function work
+    },
+    success : function(data){
+      console.log(data);
+
+    },//success
+    error:function(){
+      console.log('error: cannot call api');
+    }//error
+  });//ajax
+});//submit function for updateItem form
+
+// Delete project
+$('#deleteProductBtn').click(function(){
+  $('#deleteProductForm').show();
+  $('#productForm').hide();
+  $('#addProductForm').hide();
+  $('#deleteForm').submit(function(){
+    event.preventDefault();
+    if(!sessionStorage['userId']){
+      alert('401, permission denied');
+      return;
+    };
+    let  productId = $('#deleteProductId').val();
+    console.log(productId);
+    if (productId == '') {
+      alert('Please enter product id');
+    } else { $.ajax({
+      url :`${url}/deleteProduct/${productId}`,
+      type :'DELETE',
       data:{
-        username : username,
-        email : email,
-        password : password
-        },
-      success : function(loginData){
-        if (remember) {
-          sessionStorage.setItem('memberId',loginData['_id']);
-          sessionStorage.setItem('userName',loginData['username']);
-          sessionStorage.setItem('userEmail',loginData['email']);
-          console.log(sessionStorage);
-
-          $('#logoutDIV').show();
-          $('#projectDIV').show();
-          $('#homePage').show();
-          makeCards();
-          $('#loginDIV').hide();
-          $('#signUpDIV').hide();
-          $('#signUpPage').hide();
-          $('#loginPage').hide();
-
+        userId: sessionStorage['userId']
+      },
+      success : function(data){
+        console.log(data);
+        if (data=='deleted'){
+          alert('deleted');
+          $('#deleteProductId').val('');
         } else {
-          sessionStorage.setItem('memberId',loginData['_id']);
-          sessionStorage.setItem('userName',loginData['username']);
-          sessionStorage.setItem('userEmail',loginData['email']);
-          console.log(sessionStorage);
-          $('#logoutDIV').show();
-          $('#projectDIV').show();
-          $('#homePage').show();
-          makeCards();
-          $('#loginDIV').hide();
-          $('#signUpDIV').hide();
-          $('#signUpPage').hide();
-          $('#loginPage').hide();
+          alert('Enter a valid id');
         }
       },//success
       error:function(){
         console.log('error: cannot call api');
       }//error
     });//ajax
-  });//document.ready
+  }
+});//submit function for delete product
+});
+// Yanas code ENDS
 
 
-  // Yanas Code
-
-  // UPDATE ITEM FORM ===============================================
-
-  // update item
-  $('#updateProjectForm').submit(function(){
-    event.preventDefault();
-    let projectId = $('#updateProjectId').val();
-    let projectUsername = $('#updateProjectUsername').val();
-    let projectDescription = $('#updateProjectDescription').val();
-    let projectImage = $('#updateProjectImage').val();
-    let memberId = $('#updateMemberId').val();
-
-    $.ajax({
-      url :`${url}/updateItem/${projectId}`,
-      type :'PATCH',
-      data:{
-        username : projectUsername,
-        description : projectDescription,
-        image : projectImage,
-        memberId : memberId //Natalia changes this line to make this function work
-      },
-      success : function(data){
-        console.log(data);
-
-      },//success
-      error:function(){
-        console.log('error: cannot call api');
-      }//error
-    });//ajax
-  });//submit function for updateItem form
-
-
-  // Yanas code ENDS
-
-
-  //Natalia's code
+//Natalia's code
 
 function showMemberName(name){
   document.getElementById('memberName').innerHTML = "Hello " + name +"!";
 }
 
 function showMyProjects(){
-    $.ajax({
-      url :`${url}/allItems`,
-      type :'GET',
-      dataType :'json',
-      success : function(itemsFromMongo){
-        let currentMemberId = sessionStorage.getItem("memberId");
-        myProjects = itemsFromMongo.filter(item=>item.memberId === currentMemberId);
-        renderAllCards(myProjects);
-        showAddProjectButton();
-      }
-    });
-}; 
-
+  $.ajax({
+    url :`${url}/allItems`,
+    type :'GET',
+    dataType :'json',
+    success : function(itemsFromMongo){
+      let currentMemberId = sessionStorage.getItem("memberId");
+      myProjects = itemsFromMongo.filter(item=>item.memberId === currentMemberId);
+      renderAllCards(myProjects);
+      showAddProjectButton();
+    }
+  });
+};
 
 function showAddProjectButton(){
-  document.getElementById('pItemCards').innerHTML += `<div class="col-md-3">
+  document.getElementById('pItemCardsBefore').innerHTML = "";
+  document.getElementById('pItemCardsBefore').innerHTML += `<div class="col-md-3">
   <div class="card mb-4 shadow-sm">
   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSi4cMVLwifOM2O4CyiXIVuFhlnEKVr-4W7tIJ410ternhEe0J_" class="card-img-top text-muted" alt="Add Project">
   <div class="card-body">
@@ -475,11 +516,9 @@ function showAddProjectForm(){
   $('#pItemCards').hide();
 }
 
-
-
 function renderAllCards(projects){
   document.getElementById('pItemCards').innerHTML = "";
-  
+
   for(let i=0; i<projects.length; i++){
     let project = projects[i];
     let card = renderCard(project);
@@ -489,30 +528,32 @@ function renderAllCards(projects){
 
 function renderCard(project){
   return  `<div class="col-md-3">
-      <div class="card mb-4 shadow-sm">
-      <img src="${project.image}" class="card-img-top text-muted" alt="Picture from ${project.username} project">
-      <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Test</text>
-        <div class="card-body">
-        <p class="card-text">${project.description}</p>
-          <div class="d-flex justify-content-between align-items-center">
-          <div class="btn-group">
-            <button id="deleteProject_${project._id}" type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
-            <button onclick="showUpdateForm('${project._id}')" id="updateProject_${project._id}" type="button" class="btn btn-sm btn-outline-secondary ">Update</button>
-          </div>
-          <small class="text-muted">${project.username}</small>
-          </div>
-        </div>
-      </div>
-    </div>`;
+  <div class="card mb-4 shadow-sm">
+  <img src="${project.image}" class="card-img-top text-muted" alt="Picture from ${project.username} project">
+  <div class="card-body">
+  <p class="card-text">${project.description}</p>
+  <div class="d-flex justify-content-between align-items-center">
+  <div class="btn-group">
+  <button id="deleteProject_${project._id}" type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+  <button onclick="showUpdateForm('${project._id}')" id="updateProject_${project._id}" type="button" class="btn btn-sm btn-outline-secondary ">Update</button>
+  </div>
+  <small class="text-muted">${project.username}</small>
+  </div>
+  </div>
+  </div>
+  </div>`;
 }
 
-
 function showUpdateForm(projectId){
+  $('#updateItemDiv').show();
+  $('#pItemCards').hide();
+  $('#pItemCardsBefore').hide();
   console.log(projectId);
   let projects = myProjects.filter(item=>item._id === projectId);
   let project = projects[0];
   $('#updateProjectId').val(project._id);
   $('#updateProjectUsername').val(project.username);
+  $('#updateProjectUsername').val(project.title);
   $('#updateProjectDescription').val(project.description);
   $('#updateProjectImage').val(project.image);
   $('#updateMemberId').val(project.memberId);
