@@ -561,4 +561,3 @@ function showDeleteForm(projectId){
   $('#deleteProjectId').val(project._id);
   $('#deleteProjectForm').removeClass("d-none");
 }
-
