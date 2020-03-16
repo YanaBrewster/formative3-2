@@ -1,23 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <!-- <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <title>Formative3-2</title> -->
   <meta charset="utf-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.6">
     <title>formative3-2</title>
     <link href="css/style.css" rel="stylesheet">
-    <!-- <link href="https://fonts.googleapis.com/css?family=EB+Garamond&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=EB+Garamond|Julius+Sans+One&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css?family=Roboto|Squada+One&display=swap" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -32,26 +22,13 @@
     <link rel="mask-icon" href="/docs/4.4/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
     <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon.ico">
     <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
-
 </head>
 <body>
-
   <div id="navbar">
-
-  <!-- <h1 id="heading" class="display-1 jumbotron bg-secondary text-white text-center">Formative3-2</h1> -->
   <nav class="site-header sticky-top py-1 bg-dark pt-2">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-      <h4 class=""><a id="homeBtn" href="#" class="py-2 pb-2" aria-label="Product">@trend</h4>
-      <p id="memberName" class="py-2 d-none d-md-inline-block" href="#"></p>
-
-      <a class="py-2 d-none d-md-inline-block" href="#"></a>
-      <a class="py-2 d-none d-md-inline-block" href="#"></a>
-      <a class="py-2 d-none d-md-inline-block" href="#"></a>
-      <a class="py-2 d-none d-md-inline-block" href="#"></a>
-      <a class="py-2 d-none d-md-inline-block" href="#"></a>
-      <a class="py-2 d-none d-md-inline-block" href="#"></a>
-      <a class="py-2 d-none d-md-inline-block" href="#"></a>
-      <a class="py-2 d-none d-md-inline-block" href="#"></a>
+    <div class="container ml-0 d-flex flex-column flex-md-row justify-content-between">
+      <h4 class="ml-5"><a id="homeBtn" href="#" class="py-2 pb-2" aria-label="Product">@trend</h4>
+      <p id="memberName" class="py-2 d-none d-md-inline-block mr-5" href="#"></p>
         <div id="loginDIV">
           <a id="loginBtn" class="py-2 pt-3 d-none d-md-inline-block" href="#">Log in</a>
         </div>
@@ -72,12 +49,11 @@
 <!-- yanas code for BANNER -->
 
 <div class="row pb-5">
-  <div class="col col-sm-12 col-md-12 col-lg-12">
+  <div class="col col-sm-12 col-md-12 col-sm-12">
     <div class="banner-heading banner-image">
       <div class="banner-overlay">
       <h1 class="font-weight-normal text-center font-weight-bold pt-5 mt-5">Discover design and photography</h1>
       <br><p class="lead font-weight-normal"></p>
-      <a class="btn btn-secondary" href="#">Discover</a>
     </div>
     </div>
   </div>
@@ -111,7 +87,7 @@
       </div>
 
     </form>
-    <button id="signUpSubmitBtn" class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+    <button id="signUpSubmitBtn" class="btn btn-sm btn-primary btn-block" type="submit">Sign up</button>
   </div>
   <!-- Sign up page ENDS -->
 
@@ -140,7 +116,7 @@
   <!-- My projects page -->
   <div id="projectPage">
     <h3 class="display-5 text-center mt-5 mb-5">My projects</h3>
-    <div class="container">
+    <div class="ml-3 mr-3">
       <div id="pItemCardsBefore"></div>
       <div id="pItemCards" class="row"></div>
     </div>
@@ -149,7 +125,6 @@
     <div id="addItemDiv" class="container w-50">
       <form class="py-5 px-5">
         <h1 class="text-primary"> Add Project Form </h1>
-
         <label class="mr-5" for="a-name"> Enter name of the project </label>
         <input type="text" id="a-name" name="projectTitle" class="form-control mb-2" placeholder="Project title" required focusable>
 
@@ -160,11 +135,11 @@
         <input type="text"  id="a-imageurl" name="a-imageurl" class="form-control mb-2" placeholder="Image Url" required focusable>
         <div class="row">
           <div class="col">
-              <button id="projectCancelAddBtn" class="btn btn-lg btn-outline-danger">Cancel</button>
+              <button id="projectCancelAddBtn" class="btn btn-sm btn-outline-danger">Cancel</button>
           </div>
             <div class="col"></div>
           <div class="col">
-            <button id="projectAddBtn" class="btn btn-lg btn-outline-success">Add project</button>
+            <button id="projectAddBtn" class="btn btn-sm btn-outline-success">Add project</button>
           </div>
         </div>
       </form>
@@ -176,7 +151,8 @@
       <h1 class="text-primary"> Update project </h1>
 
       <input type="hidden" id="updateProjectId"/>
-      <input type="hidden" id="updateMemberId"/>
+      <input type="hidden" id="updateProjectMemberId"/>
+      <input type="hidden" id="updateProjectUsername"/>
       <label class="mr-5" for="a-name"> Enter name of the project </label>
       <input id="updateProjectTitle" type="text" name="projectName" class="form-control mb-2" placeholder="Project Title" required focusable>
 
@@ -186,19 +162,35 @@
       <label class="mr-5" for="a-imageurl"> Enter the image url </label>
       <input id="updateProjectImage" type="text" name="a-imageurl" class="form-control mb-2" placeholder="Image Url" required focusable>
 
-      <div class="row">
-        <div class="col">
-            <button id="projectCancelAddBtn" class="btn btn-lg btn-outline-danger">Cancel</button>
-        </div>
-          <div class="col"></div>
-        <div class="col">
-          <button id="projectAddBtn" class="btn btn-lg btn-outline-success" type="submit">Add project</button>
-        </div>
-      </div>
+     
     </form>
+    <div class="row">
+      <div class="col">
+          <button id="projectCancelUpdateBtn" class="btn btn-sm btn-outline-danger">Cancel</button>
+      </div>
+        <div class="col"></div>
+      <div class="col">
+        <button id="projectUpdateBtn" class="btn btn-sm btn-outline-success" >Update project</button>
+      </div>
+    </div>
     </div>
 
-
+    <!--delete project form - Natalia's code -->
+    <div id="deleteItemDiv" class="container w-50">
+      <form id="deleteProjectForm" class=" d-none py-5 px-5">
+        <h1 class="text-primary"> Are you sure you want to delete project? </h1>
+        <input type="hidden" id="deleteProjectId"/>
+        <div class="row">
+          <div class="col">
+              <button id="projectCancelDeleteBtn" class="btn btn-sm btn-outline-danger">Cancel</button>
+          </div>
+            <div class="col"></div>
+          <div class="col">
+            <button id="projectDeleteBtn" class="btn btn-sm btn-outline-success">Delete project</button>
+          </div>
+        </div>
+      </form>
+      </div>
 
   </div>
 

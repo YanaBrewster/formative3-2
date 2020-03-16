@@ -123,8 +123,8 @@ app.get('/allItems', (req,res) =>{
   }).catch(err => res.send(err));
 });
 
-// DELETE an item
-app.delete('/deleteItem/:id',(req,res)=>{
+// DELETE an project
+app.delete('/deleteProject/:id',(req,res)=>{
   const idParam = req.params.id;
   Item.findOne({_id:idParam}, (err,item)=>{
     if (item){
@@ -153,7 +153,7 @@ app.post('/addItem', (req,res) =>{
       res.send('Item already added');
     } else{
       const item = new Item({
-        _id : new mongoose.Types.ObjectId,
+        
         username : req.body.username,
         title : req.body.title,
         description: req.body.description,
@@ -188,8 +188,9 @@ app.patch('/updateItem/:id',(req,res)=>{
     // }
     //this code will be reached only for existing item and the same memberID, so we can safely update
     const updatedItem ={
+      _id:idParam,
       username:req.body.username,
-      title : req.body.name,
+      title : req.body.title,
       description:req.body.description,
       image : req.body.image,
       memberId : req.body.memberId
