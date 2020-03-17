@@ -49,7 +49,7 @@
 
 <!-- yanas code for BANNER -->
 
-<div class="row pb-5">
+<div id="banner" class="row pb-5">
   <div class="col col-sm-12 col-md-12 col-sm-12">
     <div class="banner-heading banner-image">
       <div class="banner-overlay">
@@ -134,16 +134,16 @@
 
         <label class="mr-5" for="a-imageurl"> Enter the image url </label>
         <input type="text"  id="a-imageurl" name="a-imageurl" class="form-control mb-2" placeholder="Image Url" required focusable>
-        <div class="row">
-          <div class="col">
-              <button id="projectCancelAddBtn" class="btn btn-sm btn-outline-danger">Cancel</button>
-          </div>
-            <div class="col"></div>
-          <div class="col">
-            <button id="projectAddBtn" class="btn btn-sm btn-outline-success">Add project</button>
-          </div>
-        </div>
       </form>
+      <div class="row">
+        <div class="col">
+            <button id="projectCancelAddBtn" class="btn btn-sm btn-outline-danger">Cancel</button>
+        </div>
+          <div class="col"></div>
+        <div class="col">
+          <button id="projectAddBtn" class="btn btn-sm btn-outline-success">Add project</button>
+        </div>
+      </div>
     </div>
 
     <!--Update project form - Natalia's code -->
@@ -163,7 +163,7 @@
       <label class="mr-5" for="a-imageurl"> Enter the image url </label>
       <input id="updateProjectImage" type="text" name="a-imageurl" class="form-control mb-2" placeholder="Image Url" required focusable>
 
-     
+
     </form>
     <div class="row">
       <div class="col">
@@ -181,16 +181,16 @@
       <form id="deleteProjectForm" class=" d-none py-5 px-5">
         <h1 class="text-primary"> Are you sure you want to delete project? </h1>
         <input type="hidden" id="deleteProjectId"/>
-        <div class="row">
-          <div class="col">
-              <button id="projectCancelDeleteBtn" class="btn btn-sm btn-outline-danger">Cancel</button>
-          </div>
-            <div class="col"></div>
-          <div class="col">
-            <button id="projectDeleteBtn" class="btn btn-sm btn-outline-success">Delete project</button>
-          </div>
-        </div>
       </form>
+      <div class="row">
+        <div class="col">
+            <button id="projectCancelDeleteBtn" class="btn btn-sm btn-outline-danger">Cancel</button>
+        </div>
+          <div class="col"></div>
+        <div class="col">
+          <button id="projectDeleteBtn" class="btn btn-sm btn-outline-success">Delete project</button>
+        </div>
+      </div>
       </div>
 
   </div>

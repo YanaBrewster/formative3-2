@@ -68,7 +68,9 @@ app.use(cors());
 // Add Member
 app.post('/addMember', (req,res)=>{
   Member.findOne({username:req.body.username},(err,memberResult)=>{
-    if (memberResult){
+    if (req.body.username === ""){
+      res.send('Please fill in all areas');
+    } else if (memberResult){
       res.send('Username taken already. Please try another one');
     } else{
       const hash = bcryptjs.hashSync(req.body.password);
@@ -153,7 +155,7 @@ app.post('/addItem', (req,res) =>{
       res.send('Item already added');
     } else{
       const item = new Item({
-        
+        _id : new mongoose.Types.ObjectId,
         username : req.body.username,
         title : req.body.title,
         description: req.body.description,
