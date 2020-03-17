@@ -23,7 +23,7 @@ $.ajax({
 $(document).ready(function(){
   // console.log("js is working");
 
-  //check if there is any session sessionStorage
+
   if (sessionStorage['userName']) {
     console.log('You are logged in');
     $('#logoutDIV').show();
@@ -95,6 +95,7 @@ $(document).ready(function(){
     //makeprojectCards();
     showMyProjects();
     $('#updateItemDiv').hide();
+    $('#deleteItemDiv').hide();
     $('#pItemCards').show();
     $('#pItemCardsBefore').show();
     $('#addItemDiv').hide();
@@ -103,12 +104,31 @@ $(document).ready(function(){
     $('#signUpPage').hide();
   });
 
-  //project button
+  //project add button
   $('#projectCancelAddBtn').click(function(){
+    $('#pItemCardsBefore').show();
     $('#pItemCards').show();
-    makeprojectCards();
+    showMyProjects();
     $('#addItemDiv').hide();
   });
+
+  //project update button
+  $('#projectCancelUpdateBtn').click(function(){
+    $('#pItemCardsBefore').show();
+    $('#pItemCards').show();
+    showMyProjects();
+    $('#updateItemDiv').hide();
+  });
+
+  //project delete button
+  $('#projectCancelDeleteBtn').click(function(){
+    $('#pItemCardsBefore').show();
+    $('#pItemCards').show();
+    showMyProjects();
+    $('#deleteItemDiv').hide();
+  });
+
+
 
 
   //get Member JS and login
@@ -227,7 +247,7 @@ $(document).ready(function(){
             `<div class="col-md-3">
             <div class="card mb-4 shadow-sm">
             <img src="${itemsFromMongo[i].image}" class="card-img-top text-muted" alt="Picture from ${itemsFromMongo[i].username}\'s project">
-            
+
             <div class="card-body">
             <strong>${itemsFromMongo[i].title}</strong>
             <p class="card-text">${itemsFromMongo[i].description}</p>
@@ -343,6 +363,10 @@ $(document).ready(function(){
       },
       success : function(loginData){
         console.log(loginData);
+          $('#pItemCardsBefore').show();
+          $('#pItemCards').show();
+          showMyProjects();
+          $('#addItemDiv').hide();
 
       },//success
       error:function(){
@@ -368,34 +392,44 @@ $('#signUpSubmitBtn').click(function(){
       password : password
     },
     success : function(loginData){
-      if (remember) {
+      console.log(loginData);
+      if (loginData === 'Please fill in all areas') {
+        alert('Please fill in all areas')
+      } else if (loginData === 'Username taken already. Please try another one') {
+        alert('Username taken already. Please try another one')
+      } else if (remember) {
         sessionStorage.setItem('memberId',loginData['_id']);
         sessionStorage.setItem('userName',loginData['username']);
         sessionStorage.setItem('userEmail',loginData['email']);
         console.log(sessionStorage);
+        showMemberName(sessionStorage.userName);
 
         $('#logoutDIV').show();
         $('#projectDIV').show();
         $('#homePage').show();
-        makeCards();
+        // makeCards();
         $('#loginDIV').hide();
         $('#signUpDIV').hide();
         $('#signUpPage').hide();
         $('#loginPage').hide();
+        $('#banner').hide();
 
       } else {
         sessionStorage.setItem('memberId',loginData['_id']);
         sessionStorage.setItem('userName',loginData['username']);
         sessionStorage.setItem('userEmail',loginData['email']);
         console.log(sessionStorage);
+        showMemberName(sessionStorage.userName);
+
         $('#logoutDIV').show();
         $('#projectDIV').show();
         $('#homePage').show();
-        makeCards();
+        // makeCards();
         $('#loginDIV').hide();
         $('#signUpDIV').hide();
         $('#signUpPage').hide();
         $('#loginPage').hide();
+        $('#banner').hide();
       }
     },//success
     error:function(){
@@ -433,6 +467,11 @@ $('#projectUpdateBtn').click(function(){
     },
     success : function(data){
       console.log(data);
+        $('#pItemCardsBefore').show();
+        $('#pItemCards').show();
+        showMyProjects();
+        $('#updateItemDiv').hide();
+
 
     },//success
     error:function(){
@@ -443,7 +482,7 @@ $('#projectUpdateBtn').click(function(){
 
 // Yanas code ENDS
 
-// Yana and Natalia 
+// Yana and Natalia
 // Delete project
 
 $('#projectDeleteBtn').on('click',function(){
@@ -458,6 +497,10 @@ $('#projectDeleteBtn').on('click',function(){
       if (data=='deleted'){
         alert('deleted');
         $('#deleteProjectId').val('');
+        $('#pItemCardsBefore').show();
+        $('#pItemCards').show();
+        showMyProjects();
+        $('#deleteItemDiv').hide();
       } else {
         alert('Error while deleting project');
       }
@@ -504,6 +547,7 @@ function showAddProjectButton(){
 function showAddProjectForm(){
   $('#addItemDiv').show();
   $('#pItemCards').hide();
+  $('#pItemCardsBefore').hide();
 }
 
 function renderAllCards(projects){
@@ -528,7 +572,7 @@ function renderCard(project){
   <button id="deleteProject_${project._id}" onclick="showDeleteForm('${project._id}')" type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
   <button id="updateProject_${project._id}" onclick="showUpdateForm('${project._id}')" type="button" class="btn btn-sm btn-outline-secondary ">Update</button>
   </div>
-  
+
   </div>
   </div>
   </div>
